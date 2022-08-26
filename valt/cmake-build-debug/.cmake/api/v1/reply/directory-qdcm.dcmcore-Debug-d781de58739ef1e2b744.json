@@ -1,0 +1,137 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"include"
+		],
+		"files" : 
+		[
+			"cmake/build_shared_lib.cmake",
+			"qdcm/dcmcore/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 63,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 69,
+				"parent" : 2
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 3,
+			"component" : "includes",
+			"destination" : "include/dcmcore",
+			"paths" : 
+			[
+				"qdcm/dcmcore/include/DcmCharSet.h",
+				"qdcm/dcmcore/include/DcmCoreApi.h",
+				"qdcm/dcmcore/include/DcmDataset.h",
+				"qdcm/dcmcore/include/DcmDictionary.h",
+				"qdcm/dcmcore/include/DcmFile.h",
+				"qdcm/dcmcore/include/DcmGlobal.h",
+				"qdcm/dcmcore/include/DcmModule.h",
+				"qdcm/dcmcore/include/DcmPDUItem.h",
+				"qdcm/dcmcore/include/DcmReader.h",
+				"qdcm/dcmcore/include/DcmStream.h",
+				"qdcm/dcmcore/include/DcmTag.h",
+				"qdcm/dcmcore/include/DcmTagAE.h",
+				"qdcm/dcmcore/include/DcmTagAS.h",
+				"qdcm/dcmcore/include/DcmTagAT.h",
+				"qdcm/dcmcore/include/DcmTagBinary.h",
+				"qdcm/dcmcore/include/DcmTagCS.h",
+				"qdcm/dcmcore/include/DcmTagDA.h",
+				"qdcm/dcmcore/include/DcmTagDS.h",
+				"qdcm/dcmcore/include/DcmTagDT.h",
+				"qdcm/dcmcore/include/DcmTagDescription.h",
+				"qdcm/dcmcore/include/DcmTagFD.h",
+				"qdcm/dcmcore/include/DcmTagFL.h",
+				"qdcm/dcmcore/include/DcmTagGroup.h",
+				"qdcm/dcmcore/include/DcmTagIS.h",
+				"qdcm/dcmcore/include/DcmTagItem.h",
+				"qdcm/dcmcore/include/DcmTagKey.h",
+				"qdcm/dcmcore/include/DcmTagLO.h",
+				"qdcm/dcmcore/include/DcmTagLT.h",
+				"qdcm/dcmcore/include/DcmTagList.h",
+				"qdcm/dcmcore/include/DcmTagPN.h",
+				"qdcm/dcmcore/include/DcmTagPixelData.h",
+				"qdcm/dcmcore/include/DcmTagPixelDataItem.h",
+				"qdcm/dcmcore/include/DcmTagSH.h",
+				"qdcm/dcmcore/include/DcmTagSL.h",
+				"qdcm/dcmcore/include/DcmTagSQ.h",
+				"qdcm/dcmcore/include/DcmTagSS.h",
+				"qdcm/dcmcore/include/DcmTagST.h",
+				"qdcm/dcmcore/include/DcmTagString.h",
+				"qdcm/dcmcore/include/DcmTagTM.h",
+				"qdcm/dcmcore/include/DcmTagUI.h",
+				"qdcm/dcmcore/include/DcmTagUL.h",
+				"qdcm/dcmcore/include/DcmTagUS.h",
+				"qdcm/dcmcore/include/DcmTagUT.h",
+				"qdcm/dcmcore/include/DcmTransferSyntax.h",
+				"qdcm/dcmcore/include/DcmTypes.h",
+				"qdcm/dcmcore/include/DcmVr.h",
+				"qdcm/dcmcore/include/DcmWriter.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "libraries",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/deploy/debug/libdcmcore.dylib"
+			],
+			"targetId" : "dcmcore::@0da9e2a8f835f52dc4b3",
+			"targetIndex" : 0,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "libraries",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/deploy/debug/libdcmcore.dylib"
+			],
+			"targetId" : "dcmcore::@0da9e2a8f835f52dc4b3",
+			"targetIndex" : 0,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "qdcm/dcmcore",
+		"source" : "qdcm/dcmcore"
+	}
+}
