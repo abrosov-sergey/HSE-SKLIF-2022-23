@@ -140,8 +140,10 @@ private: // FIELDS
 
     QMenu* fileMenu_;
     QAction* openAction_;
+    QAction* openProjectAction_;
     QAction* exportRawImageAction_;
     QAction* exportImageWithMarksAction_;
+    QAction* saveProjectAction_;
     QAction* exitAction_;
 
     QVBoxLayout* mainLayout_;
