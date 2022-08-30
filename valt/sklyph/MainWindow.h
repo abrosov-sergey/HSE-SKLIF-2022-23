@@ -137,6 +137,8 @@ private: // FIELDS
     QLineEdit* totalVolumeWidget_;
     QLineEdit* infectedVolumeWidget_;
     QLineEdit* infectedVolumePartWidget_;
+    QLineEdit* densityOfHounsfieldWidget_;
+    QLineEdit* distanceFromTwoPointsWidget_;
 
     QMenu* fileMenu_;
     QAction* openAction_;
