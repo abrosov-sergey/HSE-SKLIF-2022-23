@@ -104,7 +104,7 @@ void MainWindow::executeOpenProjectDirDialog()
 {
     const QString path = QFileDialog::getExistingDirectory(this,
                                                          tr("Open DICOM directory"),
-                                                         "/");
+                                                         "~");
     if (path.isEmpty()) {
         return;
     }
@@ -116,7 +116,7 @@ void MainWindow::executeExportRawImageDialog()
 {
     const QString fileName = QFileDialog::getSaveFileName(this,
                                                           tr("Export slice to image file"),
-                                                          "/",
+                                                          "~",
                                                           tr("Images ") + IMAGE_FORMAT_FILTERS_STRING);
     if (fileName.isEmpty()) {
         return;
@@ -129,7 +129,7 @@ void MainWindow::executeExportImageWithMarksDialog()
 {
     const QString fileName = QFileDialog::getSaveFileName(this,
                                                           tr("Export slice with marks to image file"),
-                                                          "/",
+                                                          "~",
                                                           tr("Images ") + IMAGE_FORMAT_FILTERS_STRING);
     if (fileName.isEmpty()) {
         return;
@@ -593,9 +593,14 @@ void MainWindow::setupLungVolumeInfoLayout()
 
 void MainWindow::createActions()
 {
-    openAction_ = new QAction(tr("Open..."), this);
-    openAction_->setStatusTip(tr("Open DICOM file"));
+    openAction_ = new QAction(tr("Open DICOM folder"), this);
+    openAction_->setStatusTip(tr("Open DICOM folder"));
     connect(openAction_, SIGNAL(triggered()), this, SLOT(executeOpenProjectDirDialog()));
+
+    openProjectAction_ = new QAction(tr("Open project"), this);
+    openProjectAction_->setStatusTip(tr("Open project folder"));
+    // TODO: Change the method member
+    connect(openProjectAction_, SIGNAL(triggered()), this, SLOT(executeOpenProjectDirDialog()));
 
     exportRawImageAction_ = new QAction(tr("Export raw image"), this);
     exportRawImageAction_->setStatusTip(tr("Render current slice to image file"));
@@ -604,6 +609,10 @@ void MainWindow::createActions()
     exportImageWithMarksAction_ = new QAction(tr("Export image with marks"), this);
     exportImageWithMarksAction_->setStatusTip(tr("Render current slice with marked infected area to image file"));
     connect(exportImageWithMarksAction_, SIGNAL(triggered()), this, SLOT(executeExportImageWithMarksDialog()));
+
+    saveProjectAction_ = new QAction(tr("Save project"), this);
+    saveProjectAction_->setStatusTip(tr("Save the hole project"));
+    connect(saveProjectAction_, SIGNAL(triggered()), this, SLOT(executeExportImageWithMarksDialog()));
 
     exitAction_ = new QAction(tr("E&xit"), this);
     exitAction_->setShortcuts(QKeySequence::Quit);
@@ -615,8 +624,10 @@ void MainWindow::createMenus()
 {
     fileMenu_ = menuBar()->addMenu(tr("&File"));
     fileMenu_->addAction(openAction_);
+    fileMenu_->addAction(openProjectAction_);
     fileMenu_->addAction(exportRawImageAction_);
     fileMenu_->addAction(exportImageWithMarksAction_);
+    fileMenu_->addAction(saveProjectAction_);
     fileMenu_->addSeparator();
     fileMenu_->addAction(exitAction_);
 
@@ -630,6 +641,7 @@ void MainWindow::updateMenuActions()
 
     exportRawImageAction_->setEnabled(sliceIsAvailable);
     exportImageWithMarksAction_->setEnabled(sliceIsAvailable);
+    saveProjectAction_->setEnabled(sliceIsAvailable);
 }
 
 void MainWindow::resetProject()
@@ -681,7 +693,7 @@ void MainWindow::renderImageWithMarksToFile(const QString& filePath)
 
 void MainWindow::renderPixmapToFile(const QPixmap& pixmap, const QString& filePath)
 {
-    pixmap.save(filePath);
+    pixmap.save(filePath + ".png","PNG");
 }
 
 void MainWindow::updateScalingFactorSpinBox()
