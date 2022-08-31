@@ -102,14 +102,14 @@ void MainWindow::wheelEvent(QWheelEvent* event)
 
 void MainWindow::executeOpenProjectDirDialog()
 {
-    const QString path = QFileDialog::getExistingDirectory(this,
+    projectPath_ = QFileDialog::getExistingDirectory(this,
                                                          tr("Open DICOM directory"),
                                                          "~");
-    if (path.isEmpty()) {
+    if (projectPath_.isEmpty()) {
         return;
     }
 
-    processPath(path);
+    processPath(projectPath_);
 }
 
 void MainWindow::executeExportRawImageDialog()
@@ -136,6 +136,36 @@ void MainWindow::executeExportImageWithMarksDialog()
     }
 
     renderImageWithMarksToFile(fileName);
+}
+
+void MainWindow::executeOpenProjectFiles()
+{
+    projectPath_ = QFileDialog::getExistingDirectory(this,
+                                                           tr("Open DICOM directory"),
+                                                           "~");
+    if (projectPath_.isEmpty()) {
+        return;
+    }
+
+    processPath(projectPath_);
+};
+
+void MainWindow::executeSaveProjectFiles()
+{
+    const QString dirName = QFileDialog::getExistingDirectory(this,
+                                                          tr("Save project file"),
+                                                          "~");
+    if (dirName.isEmpty()) {
+        return;
+    }
+
+    const DicomSeriePtr serie = currentSerie();
+
+    if (!serie) {
+        return;
+    }
+
+    saveProjectFies(serie, dirName);
 }
 
 void MainWindow::reloadProject(const QString& path)
@@ -399,6 +429,8 @@ void MainWindow::setupTopBarLayout()
     topBarLayout_->addSpacing(10);
     topBarLayout_->addLayout(toolsLayout_);
     topBarLayout_->addStretch();
+
+    topBarLayout_->setAlignment(Qt::AlignTop);
 }
 
 void MainWindow::setupDicomWidgets()
@@ -539,17 +571,21 @@ void MainWindow::setupNavigationLayout()
 //    rulerCheckBox_->setChecked(false);
 //    connect(rulerCheckBox_, SIGNAL(stateChanged(int)), this, SLOT(onRulerCheckBoxStateChanged(int)));
 
+    QVBoxLayout* fileInfoVBox = new QVBoxLayout();
+    fileInfoVBox->addWidget(patientsLabel);
+    fileInfoVBox->addWidget(patientsSelectCombo_);
+    fileInfoVBox->addWidget(studiesLabel);
+    fileInfoVBox->addWidget(studiesSelectCombo_);
+    fileInfoVBox->addWidget(seriesLabel);
+    fileInfoVBox->addWidget(seriesSelectCombo_);
+
     navigationLayout_ = new QHBoxLayout;
-    navigationLayout_->addWidget(patientsLabel);
-    navigationLayout_->addWidget(patientsSelectCombo_);
-    navigationLayout_->addWidget(studiesLabel);
-    navigationLayout_->addWidget(studiesSelectCombo_);
-    navigationLayout_->addWidget(seriesLabel);
-    navigationLayout_->addWidget(seriesSelectCombo_);
+    navigationLayout_->addLayout(fileInfoVBox);
     navigationLayout_->addLayout(sliceLayout);
     navigationLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
     navigationLayout_->addWidget(scalingLabel);
     navigationLayout_->addWidget(scalingFactorSpinBox_);
+    navigationLayout_->setAlignment(Qt::AlignTop);
     //navigationLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
     //navigationLayout_->addWidget(rulerCheckBox_);
     navigationLayout_->addStretch();
@@ -642,7 +678,7 @@ void MainWindow::createActions()
     openProjectAction_ = new QAction(tr("Open project"), this);
     openProjectAction_->setStatusTip(tr("Open project folder"));
     // TODO: Change the method member
-    connect(openProjectAction_, SIGNAL(triggered()), this, SLOT(executeOpenProjectDirDialog()));
+    connect(openProjectAction_, SIGNAL(triggered()), this, SLOT(executeOpenProjectFiles()));
 
     exportRawImageAction_ = new QAction(tr("Export raw image"), this);
     exportRawImageAction_->setStatusTip(tr("Render current slice to image file"));
@@ -654,7 +690,7 @@ void MainWindow::createActions()
 
     saveProjectAction_ = new QAction(tr("Save project"), this);
     saveProjectAction_->setStatusTip(tr("Save the hole project"));
-    connect(saveProjectAction_, SIGNAL(triggered()), this, SLOT(executeExportImageWithMarksDialog()));
+    connect(saveProjectAction_, SIGNAL(triggered()), this, SLOT(executeSaveProjectFiles()));
 
     exitAction_ = new QAction(tr("E&xit"), this);
     exitAction_->setShortcuts(QKeySequence::Quit);
@@ -731,6 +767,35 @@ void MainWindow::renderImageWithMarksToFile(const QString& filePath)
     const QPixmap pixmap = editWidget_->getImageWithMarks();
 
     renderPixmapToFile(pixmap, filePath);
+}
+
+void MainWindow::saveProjectFies(const DicomSeriePtr& serie, const QString& dirPath)
+{
+
+    editWidget_->pixmap()->save(dirPath + QDir::separator() + "pixmap1234134124");
+//    for(int i = 0; i < serie->getSliceCount(); ++i)
+//    {
+//        const QPixmap pixmap = serie->getSlice(i)->pixmap();
+//
+//        renderPixmapToFile(pixmap, dirPath + "/" + "image" + QString::number(i + 1));
+//    }
+
+//    QDir dir(projectPath_);
+
+//    foreach (QString d, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+//    {
+//        QString dst_path = dirPath + QDir::separator() + d;
+//        dir.mkpath(dst_path);
+//        copyPath(projectPath_ + QDir::separator() + d, dst_path);
+//    }
+
+
+//    QStringList files = dir.entryList(QDir::Files);
+//    for(int i = 0; i < files.count(); ++i)
+//    {
+//        QFile::copy(projectPath_ + QDir::separator() + files[i],
+//                    dirPath + QDir::separator() + files[i]);
+//    }
 }
 
 void MainWindow::renderPixmapToFile(const QPixmap& pixmap, const QString& filePath)
