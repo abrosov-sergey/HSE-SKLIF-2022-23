@@ -37,6 +37,9 @@ public:
 
     void setMode(PolygonlToolMode mode);
 
+    // Начало: Абросов Сергей
+    qreal distanceBetweenTwoPoints = 0.0;
+    // Конец: Абросов Сергей
 private: // methods
     void processMousePressEvent(QMouseEvent* event);
 

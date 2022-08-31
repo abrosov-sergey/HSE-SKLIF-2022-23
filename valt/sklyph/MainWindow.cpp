@@ -188,12 +188,20 @@ void MainWindow::updateVolumesInGui()
     qreal total = currentTotalVolume();
     qreal infected = lungMatrix->getInfectedVolume();
     qreal infectedPart = lungMatrix->getInfectedVolumePercent();
+    // Начало: Абросов Сергей
+    qreal densityOfHounsfield = penToolMouseHandler_->densityOfHounsfield;
+    qreal distanceBetweenTwoPoints = 0.0;
+    // Конец: Абросов Сергей
 
     const auto bs = blockSignals(true);
 
     infectedVolumeWidget_->setText(strutils::realToString(infected));
     infectedVolumePartWidget_->setText(QString("%1 %").arg(strutils::realToString(infectedPart)));
     totalVolumeWidget_->setText(strutils::realToString(total));
+    // Начало: Абросов Сергей
+    densityOfHounsfieldWidget_->setText(strutils::realToString(densityOfHounsfield));
+    distanceFromTwoPointsWidget_->setText(strutils::realToString(distanceBetweenTwoPoints));
+    // Конец: Абросов Сергей
 
     blockSignals(bs);
 }
@@ -576,6 +584,26 @@ void MainWindow::setupLungVolumeInfoLayout()
     QLabel* infectedVolumePartUnitsLabel = new QLabel(tr("%"));
     infectedVolumePartUnitsLabel->setMaximumWidth(30);
 
+    // Начало: Абросов Сергей
+    QLabel* densityOfHounsfieldPartLabel = new QLabel(tr("Density Hounsfield:"));
+    densityOfHounsfieldPartLabel->setMaximumWidth(100);
+    densityOfHounsfieldWidget_ = new QLineEdit;
+    densityOfHounsfieldWidget_->setText("None");
+    densityOfHounsfieldWidget_->setReadOnly(true);
+    densityOfHounsfieldWidget_->setMaximumWidth(100);
+    QLabel* densityHounsfieldPartUnitsLabel = new QLabel(tr("HU"));
+    densityHounsfieldPartUnitsLabel->setMaximumWidth(30);
+
+    QLabel* distanceFromTwoPointsLabel = new QLabel(tr("Distance (2 points):"));
+    distanceFromTwoPointsLabel->setMaximumWidth(100);
+    distanceFromTwoPointsWidget_ = new QLineEdit;
+    distanceFromTwoPointsWidget_->setText("0.0");
+    distanceFromTwoPointsWidget_->setReadOnly(true);
+    distanceFromTwoPointsWidget_->setMaximumWidth(100);
+    QLabel* distanceFromTwoPointsUnitsLabel = new QLabel(tr("cm"));
+    distanceFromTwoPointsUnitsLabel->setMaximumWidth(30);
+    // Конец: Абросов Сергей
+
     lungVolumeInfoLayout_ = new QGridLayout;
     lungVolumeInfoLayout_->addWidget(totalVolumeLabel, 0, 0);
     lungVolumeInfoLayout_->addWidget(totalVolumeAutoUpdateCheckBox_, 1, 0);
@@ -587,8 +615,17 @@ void MainWindow::setupLungVolumeInfoLayout()
     lungVolumeInfoLayout_->addWidget(infectedVolumePartLabel, 5, 0);
     lungVolumeInfoLayout_->addWidget(infectedVolumePartWidget_, 6, 0);
     lungVolumeInfoLayout_->addWidget(infectedVolumePartUnitsLabel, 6, 1);
-    lungVolumeInfoLayout_->addItem(new QSpacerItem(0, 0), 7, 0);
-    lungVolumeInfoLayout_->setRowStretch(7, 1);
+    // Начало: Абросов Сергей
+    lungVolumeInfoLayout_->addWidget(densityOfHounsfieldPartLabel, 7, 0);
+    lungVolumeInfoLayout_->addWidget(densityOfHounsfieldWidget_, 8, 0);
+    lungVolumeInfoLayout_->addWidget(densityHounsfieldPartUnitsLabel, 8, 1);
+
+    lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsLabel, 9, 0);
+    lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsWidget_, 10, 0);
+    lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsUnitsLabel, 10, 1);
+    // Конец: Абросов Сергей
+    lungVolumeInfoLayout_->addItem(new QSpacerItem(0, 0), 11, 0);
+    lungVolumeInfoLayout_->setRowStretch(11, 1);
 }
 
 void MainWindow::createActions()
