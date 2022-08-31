@@ -190,7 +190,7 @@ void MainWindow::updateVolumesInGui()
     qreal infectedPart = lungMatrix->getInfectedVolumePercent();
     // Начало: Абросов Сергей
     qreal densityOfHounsfield = penToolMouseHandler_->densityOfHounsfield;
-    qreal distanceBetweenTwoPoints = 0.0;
+    qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
     // Конец: Абросов Сергей
 
     const auto bs = blockSignals(true);
@@ -484,6 +484,11 @@ void MainWindow::setupToolsLayout()
 
 void MainWindow::setupWorkAreaLayout()
 {
+    if (polygonToolMouseHandler_ != nullptr) {
+        qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
+        distanceFromTwoPointsWidget_->setText(strutils::realToString(distanceBetweenTwoPoints));
+    }
+
     setupDicomWidgets();
     setupLungVolumeInfoLayout();
 
