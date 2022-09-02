@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/dcmcore">
-        <file alias="dicom.xml">dict/dicom.xml</file>
-    </qresource>
-</RCC>
