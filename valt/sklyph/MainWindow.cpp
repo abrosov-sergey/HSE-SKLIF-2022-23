@@ -439,7 +439,6 @@ void MainWindow::setupDicomWidgets()
 
     viewWidget_ = new DicomViewWidget;
     viewWidget_->setAlignment(Qt::AlignCenter);
-    //viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     viewWidget_->setMouseHandler(viewWidgetMouseHandler_);
 
@@ -456,7 +455,7 @@ void MainWindow::setupDicomWidgets()
     editWidget_ = new DicomGriddedViewWidget(BASE_GRID_STEP_CM);
     editWidget_->setCellSizeOnScreenCm(DEFAULT_CELL_SIZE_ON_SCREEN_CM);
     editWidget_->setAlignment(Qt::AlignCenter);
-    editWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    editWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     editWidget_->setMouseHandler(editWidgetMouseHandlerHelper_);
     editWidget_->setGridStepMultiplier(GRID_MULTIPLIERS[DEFAULT_GRID_MULTIPLIER_INDEX]);
 
