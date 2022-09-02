@@ -1,0 +1,380 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "qdcm",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-qdcm-Debug-42c3dfb08b682bdd3089.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "qdcm"
+				},
+				{
+					"build" : "qdcm/dcmcore",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-qdcm.dcmcore-Debug-d781de58739ef1e2b744.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "qdcm/dcmcore",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"build" : "qdcm/dcmmod",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-qdcm.dcmmod-Debug-948c9a71eb9957414730.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "qdcm/dcmmod",
+					"targetIndexes" : 
+					[
+						14,
+						15
+					]
+				},
+				{
+					"build" : "qdcm/dcmimage",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-qdcm.dcmimage-Debug-c9c6d0d26a72fa97e7db.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 3,
+					"source" : "qdcm/dcmimage",
+					"targetIndexes" : 
+					[
+						11,
+						12,
+						13
+					]
+				},
+				{
+					"build" : "qdcm/dcmnet",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-qdcm.dcmnet-Debug-8e80e5414cd860f12de3.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 4,
+					"source" : "qdcm/dcmnet",
+					"targetIndexes" : 
+					[
+						16,
+						17
+					]
+				},
+				{
+					"build" : "sklyph",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-sklyph-Debug-30b61d4a9112100f7147.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 5,
+					"source" : "sklyph",
+					"targetIndexes" : 
+					[
+						18
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "SklyphVALT"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "dcmcore",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "dcmmod",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						14,
+						15
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "dcmimage",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						11,
+						12,
+						13
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "dcmnet",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						16,
+						17
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "sklyph",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						18
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore-Debug-6616cd02bbf870a0ad40.json",
+					"name" : "dcmcore",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmCharSet::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmCharSet-Debug-03daf2224b7f46851ff3.json",
+					"name" : "dcmcore_TestDcmCharSet",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmDictionary::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmDictionary-Debug-14e389379e9edce836ea.json",
+					"name" : "dcmcore_TestDcmDictionary",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmReader::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmReader-Debug-ce4f08d38287b62833c1.json",
+					"name" : "dcmcore_TestDcmReader",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmTagGroup::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmTagGroup-Debug-3f32a07eae824ebb20f1.json",
+					"name" : "dcmcore_TestDcmTagGroup",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmTagKey::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmTagKey-Debug-35e165a88b306622e272.json",
+					"name" : "dcmcore_TestDcmTagKey",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmTagSequence::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmTagSequence-Debug-2c4652b24470a183f7ff.json",
+					"name" : "dcmcore_TestDcmTagSequence",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmTagString::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmTagString-Debug-770ce037863b05fdc008.json",
+					"name" : "dcmcore_TestDcmTagString",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmTags::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmTags-Debug-c916be5d4256bb591b58.json",
+					"name" : "dcmcore_TestDcmTags",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmTransferSyntax::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmTransferSyntax-Debug-16ebe3be975bef20c64a.json",
+					"name" : "dcmcore_TestDcmTransferSyntax",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dcmcore_TestDcmVr::@0da9e2a8f835f52dc4b3",
+					"jsonFile" : "target-dcmcore_TestDcmVr-Debug-98f6cde72d4d7951ebd2.json",
+					"name" : "dcmcore_TestDcmVr",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "dcmimage::@013025f8b54cefbbc2a1",
+					"jsonFile" : "target-dcmimage-Debug-2cf738b0bb6e95060f32.json",
+					"name" : "dcmimage",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "dcmimage_TestDcmImage::@013025f8b54cefbbc2a1",
+					"jsonFile" : "target-dcmimage_TestDcmImage-Debug-127372cf26a68550d3df.json",
+					"name" : "dcmimage_TestDcmImage",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "dcmimage_TestDcmImageTransferFunction::@013025f8b54cefbbc2a1",
+					"jsonFile" : "target-dcmimage_TestDcmImageTransferFunction-Debug-0267059f144ebae55bd6.json",
+					"name" : "dcmimage_TestDcmImageTransferFunction",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "dcmmod::@059f42d8c6247210a0fa",
+					"jsonFile" : "target-dcmmod-Debug-633c94e3ef9d37afa9d4.json",
+					"name" : "dcmmod",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "dcmmod_TestDcmModules::@059f42d8c6247210a0fa",
+					"jsonFile" : "target-dcmmod_TestDcmModules-Debug-7ecab9863876e7bd09a1.json",
+					"name" : "dcmmod_TestDcmModules",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "dcmnet::@2c60f12b22738cda7e46",
+					"jsonFile" : "target-dcmnet-Debug-fa18b72e8d2dab54c813.json",
+					"name" : "dcmnet",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "dcmnet_TestPDUItems::@2c60f12b22738cda7e46",
+					"jsonFile" : "target-dcmnet_TestPDUItems-Debug-9b1e536455f1db377903.json",
+					"name" : "dcmnet_TestPDUItems",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "sklyph::@260be79bc532d58118fd",
+					"jsonFile" : "target-sklyph-Debug-5de3f0fa0794375e5e7a.json",
+					"name" : "sklyph",
+					"projectIndex" : 5
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/cmake-build-debug",
+		"source" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -4,12 +4,6 @@
 
 #include <QQueue>
 
-// Правки начало, Сергей Абросов
-#include <iostream>
-#include <algorithm>
-#include <iomanip>
-// Праввки конец, Сергей Абросов
-
 namespace sklyph {
 namespace valt {
 
@@ -20,16 +14,6 @@ PolygonToolMouseHandler::PolygonToolMouseHandler()
     , currentPenState_(GcellState::GCELL_INFECTED)
 {
 }
-
-// Правки начало, Сергей Абросов
-double GetSqrOfNumber(double number) {
-    return number * number;
-}
-
-double GetDistanceBetweenTwoPoints(QPoint firstPoint, QPoint secondPoint) {
-    return sqrt(GetSqrOfNumber(firstPoint.x() - secondPoint.x()) + GetSqrOfNumber(firstPoint.y() - secondPoint.y()));
-}
-// Правки конец, Сергей Абросов
 
 void PolygonToolMouseHandler::processMouseEvent(QMouseEvent* event)
 {
@@ -96,17 +80,6 @@ void PolygonToolMouseHandler::processMousePressEvent(QMouseEvent* event)
 
     addGcellVertice(posGcell);
     event->accept();
-    // Правки начало, Сергей Абросов
-// Расстояние между двумя последними отмеченными точками в полигоне.
-    if (gcellVertices_.size() >= 2) {
-//        std::cout << std::fixed << std::showpoint << std::setprecision(9);
-//        std::cout << GetDistanceBetweenTwoPoints(gcellVertices_[gcellVertices_.size() - 2],
-//                                                 gcellVertices_[gcellVertices_.size() - 1]) /*/
-//                                             (double (scalingFactorSpinBox_->value()) / 100)*/ << std::endl;
-        distanceBetweenTwoPoints = GetDistanceBetweenTwoPoints(gcellVertices_[gcellVertices_.size() - 2],
-                                                               gcellVertices_[gcellVertices_.size() - 1]);
-    }
-// Правки конец, Сергей Абросов
 }
 
 GcellState PolygonToolMouseHandler::getPenStateByMouseButtons(Qt::MouseButtons buttons) const

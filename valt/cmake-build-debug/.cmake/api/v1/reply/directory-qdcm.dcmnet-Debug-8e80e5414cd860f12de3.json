@@ -1,0 +1,117 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"include"
+		],
+		"files" : 
+		[
+			"cmake/build_shared_lib.cmake",
+			"qdcm/dcmnet/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 63,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 69,
+				"parent" : 2
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 3,
+			"component" : "includes",
+			"destination" : "include/dcmnet",
+			"paths" : 
+			[
+				"qdcm/dcmnet/include/DcmAAbort.h",
+				"qdcm/dcmnet/include/DcmAAssociateAccept.h",
+				"qdcm/dcmnet/include/DcmAAssociateReject.h",
+				"qdcm/dcmnet/include/DcmAAssociateRequest.h",
+				"qdcm/dcmnet/include/DcmAReleaseRequest.h",
+				"qdcm/dcmnet/include/DcmAReleaseResponse.h",
+				"qdcm/dcmnet/include/DcmAbstractSyntax.h",
+				"qdcm/dcmnet/include/DcmAcceptedPresentationContext.h",
+				"qdcm/dcmnet/include/DcmApplicationContext.h",
+				"qdcm/dcmnet/include/DcmCEchoRequest.h",
+				"qdcm/dcmnet/include/DcmCEchoResponse.h",
+				"qdcm/dcmnet/include/DcmCommunicator.h",
+				"qdcm/dcmnet/include/DcmDimseMessage.h",
+				"qdcm/dcmnet/include/DcmDimsePriorityRequest.h",
+				"qdcm/dcmnet/include/DcmDimseRequest.h",
+				"qdcm/dcmnet/include/DcmDimseResponse.h",
+				"qdcm/dcmnet/include/DcmNetApi.h",
+				"qdcm/dcmnet/include/DcmNetStream.h",
+				"qdcm/dcmnet/include/DcmPDUImplementationClassUID.h",
+				"qdcm/dcmnet/include/DcmPDUImplementationVersionName.h",
+				"qdcm/dcmnet/include/DcmPDUItemList.h",
+				"qdcm/dcmnet/include/DcmPDUMaxLength.h",
+				"qdcm/dcmnet/include/DcmPDUUserInfo.h",
+				"qdcm/dcmnet/include/DcmPDVItem.h",
+				"qdcm/dcmnet/include/DcmPDataTf.h",
+				"qdcm/dcmnet/include/DcmPresentationContext.h",
+				"qdcm/dcmnet/include/DcmSCU.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "libraries",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/deploy/debug/libdcmnet.dylib"
+			],
+			"targetId" : "dcmnet::@2c60f12b22738cda7e46",
+			"targetIndex" : 16,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "libraries",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/deploy/debug/libdcmnet.dylib"
+			],
+			"targetId" : "dcmnet::@2c60f12b22738cda7e46",
+			"targetIndex" : 16,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "qdcm/dcmnet",
+		"source" : "qdcm/dcmnet"
+	}
+}
