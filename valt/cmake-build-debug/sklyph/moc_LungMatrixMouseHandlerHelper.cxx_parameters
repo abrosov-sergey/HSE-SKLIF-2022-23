@@ -1,0 +1,14 @@
+-I/usr/local/include
+-F/usr/local/lib
+-I/usr/local/include/QtGui
+-I/usr/local/lib/QtCore.framework/Headers
+-I/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/qdcm/dcmcore/include
+-I/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/qdcm/dcmimage/include
+-DVERSION="0.0.0"
+-D$<$<NOT:$<CONFIG:Debug>>:QT_NO_DEBUG>
+-DQT_GUI_LIB
+-DQT_CORE_LIB
+-DQT_FATAL_ASSERT
+-o
+/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/cmake-build-debug/sklyph/moc_LungMatrixMouseHandlerHelper.cxx
+/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/sklyph/LungMatrixMouseHandlerHelper.h

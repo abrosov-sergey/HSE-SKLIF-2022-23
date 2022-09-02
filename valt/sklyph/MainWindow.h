@@ -52,8 +52,6 @@ private slots:
     void executeOpenProjectDirDialog();
     void executeExportRawImageDialog();
     void executeExportImageWithMarksDialog();
-    void executeOpenProjectFiles();
-    void executeSaveProjectFiles();
 
     void reloadProject(const QString& path);
 
@@ -120,7 +118,6 @@ private: // METHODS
     void renderRawImageToFile(const QString& filePath);
     void renderImageWithMarksToFile(const QString& filePath);
     void renderPixmapToFile(const QPixmap& pixmap, const QString& filePath);
-    void saveProjectFies(const DicomSeriePtr& serie, const QString& dirPath);
 
 private: // FIELDS
     DicomProject* project_;
@@ -140,15 +137,11 @@ private: // FIELDS
     QLineEdit* totalVolumeWidget_;
     QLineEdit* infectedVolumeWidget_;
     QLineEdit* infectedVolumePartWidget_;
-    QLineEdit* densityOfHounsfieldWidget_;
-    QLineEdit* distanceFromTwoPointsWidget_;
 
     QMenu* fileMenu_;
     QAction* openAction_;
-    QAction* openProjectAction_;
     QAction* exportRawImageAction_;
     QAction* exportImageWithMarksAction_;
-    QAction* saveProjectAction_;
     QAction* exitAction_;
 
     QVBoxLayout* mainLayout_;
@@ -177,8 +170,6 @@ private: // FIELDS
     QCheckBox* infectionMarkModeCheckBox_;
 
     QComboBox* gridStepCombo_;
-
-    QString projectPath_;
 };
 
 } // namespace valt

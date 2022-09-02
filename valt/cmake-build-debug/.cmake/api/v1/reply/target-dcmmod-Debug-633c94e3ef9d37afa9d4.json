@@ -1,0 +1,369 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/deploy/debug/libdcmmod.dylib"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"install",
+			"target_link_libraries",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"cmake/build_shared_lib.cmake",
+			"qdcm/dcmmod/CMakeLists.txt",
+			"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.22/Modules/UseQt4.cmake",
+			"cmake/add_includes.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 7,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 53,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 69,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 54,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 2
+			},
+			{
+				"file" : 2,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 85,
+				"parent" : 8
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 6,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 7,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 2
+			},
+			{
+				"file" : 3,
+				"parent" : 13
+			},
+			{
+				"command" : 5,
+				"file" : 3,
+				"line" : 4,
+				"parent" : 14
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 21,
+				"parent" : 8
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 89,
+				"parent" : 8
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=gnu++11 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -fPIC   -fPIC -Wall"
+				},
+				{
+					"fragment" : "-std=c++11"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "QT_FATAL_ASSERT"
+				},
+				{
+					"define" : "VERSION=\"0.0.0\""
+				},
+				{
+					"define" : "dcmmod_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 11,
+					"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/qdcm/dcmmod/include"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/cmake-build-debug/qdcm/dcmmod"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/qdcm/dcmcore/include"
+				},
+				{
+					"backtrace" : 16,
+					"isSystem" : true,
+					"path" : "/usr/local/include"
+				},
+				{
+					"backtrace" : 16,
+					"isSystem" : true,
+					"path" : "/usr/local/lib/QtCore.framework"
+				},
+				{
+					"backtrace" : 17,
+					"isSystem" : true,
+					"path" : "/usr/local/lib/QtCore.framework/Headers"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 6,
+			"id" : "dcmcore::@0da9e2a8f835f52dc4b3"
+		}
+	],
+	"id" : "dcmmod::@059f42d8c6247210a0fa",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 5,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 5,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-F/usr/local/lib",
+				"role" : "frameworkPath"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtCore",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "../deploy/debug/libdcmcore.dylib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtXml",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtCore",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "dcmmod",
+	"nameOnDisk" : "libdcmmod.dylib",
+	"paths" : 
+	{
+		"build" : "qdcm/dcmmod",
+		"source" : "qdcm/dcmmod"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				4,
+				5,
+				6,
+				7,
+				8
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmmod/cpp/DcmModuleGeneralEquipmentAttributes.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmmod/cpp/DcmModulePatient.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmmod/cpp/DcmModuleSOPCommon.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmmod/cpp/DcmModuleStudy.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmmod/include/DcmModuleApi.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmmod/include/DcmModuleGeneralEquipmentAttributes.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmmod/include/DcmModulePatient.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmmod/include/DcmModuleSOPCommon.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmmod/include/DcmModuleStudy.h",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

@@ -30,9 +30,6 @@ public:
 
     void setMode(PenToolMode mode);
 
-    // Начало: Абросов Сергей
-    qreal densityOfHounsfield = -10007.0;
-    // Конец: Абросов Сергей
 private: // methods
     void processMousePressEvent(QMouseEvent* event);
     void processMouseMoveEvent(QMouseEvent* event);

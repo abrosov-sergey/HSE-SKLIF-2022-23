@@ -102,21 +102,21 @@ void MainWindow::wheelEvent(QWheelEvent* event)
 
 void MainWindow::executeOpenProjectDirDialog()
 {
-    projectPath_ = QFileDialog::getExistingDirectory(this,
+    const QString path = QFileDialog::getExistingDirectory(this,
                                                          tr("Open DICOM directory"),
-                                                         "~");
-    if (projectPath_.isEmpty()) {
+                                                         "/");
+    if (path.isEmpty()) {
         return;
     }
 
-    processPath(projectPath_);
+    processPath(path);
 }
 
 void MainWindow::executeExportRawImageDialog()
 {
     const QString fileName = QFileDialog::getSaveFileName(this,
                                                           tr("Export slice to image file"),
-                                                          "~",
+                                                          "/",
                                                           tr("Images ") + IMAGE_FORMAT_FILTERS_STRING);
     if (fileName.isEmpty()) {
         return;
@@ -129,43 +129,13 @@ void MainWindow::executeExportImageWithMarksDialog()
 {
     const QString fileName = QFileDialog::getSaveFileName(this,
                                                           tr("Export slice with marks to image file"),
-                                                          "~",
+                                                          "/",
                                                           tr("Images ") + IMAGE_FORMAT_FILTERS_STRING);
     if (fileName.isEmpty()) {
         return;
     }
 
     renderImageWithMarksToFile(fileName);
-}
-
-void MainWindow::executeOpenProjectFiles()
-{
-    projectPath_ = QFileDialog::getExistingDirectory(this,
-                                                           tr("Open DICOM directory"),
-                                                           "~");
-    if (projectPath_.isEmpty()) {
-        return;
-    }
-
-    processPath(projectPath_);
-};
-
-void MainWindow::executeSaveProjectFiles()
-{
-    const QString dirName = QFileDialog::getExistingDirectory(this,
-                                                          tr("Save project file"),
-                                                          "~");
-    if (dirName.isEmpty()) {
-        return;
-    }
-
-    const DicomSeriePtr serie = currentSerie();
-
-    if (!serie) {
-        return;
-    }
-
-    saveProjectFies(serie, dirName);
 }
 
 void MainWindow::reloadProject(const QString& path)
@@ -218,20 +188,12 @@ void MainWindow::updateVolumesInGui()
     qreal total = currentTotalVolume();
     qreal infected = lungMatrix->getInfectedVolume();
     qreal infectedPart = lungMatrix->getInfectedVolumePercent();
-    // Начало: Абросов Сергей
-    qreal densityOfHounsfield = penToolMouseHandler_->densityOfHounsfield;
-    qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
-    // Конец: Абросов Сергей
 
     const auto bs = blockSignals(true);
 
     infectedVolumeWidget_->setText(strutils::realToString(infected));
     infectedVolumePartWidget_->setText(QString("%1 %").arg(strutils::realToString(infectedPart)));
     totalVolumeWidget_->setText(strutils::realToString(total));
-    // Начало: Абросов Сергей
-    densityOfHounsfieldWidget_->setText(strutils::realToString(densityOfHounsfield));
-    distanceFromTwoPointsWidget_->setText(strutils::realToString(distanceBetweenTwoPoints));
-    // Конец: Абросов Сергей
 
     blockSignals(bs);
 }
@@ -429,8 +391,6 @@ void MainWindow::setupTopBarLayout()
     topBarLayout_->addSpacing(10);
     topBarLayout_->addLayout(toolsLayout_);
     topBarLayout_->addStretch();
-
-    topBarLayout_->setAlignment(Qt::AlignTop);
 }
 
 void MainWindow::setupDicomWidgets()
@@ -439,7 +399,7 @@ void MainWindow::setupDicomWidgets()
 
     viewWidget_ = new DicomViewWidget;
     viewWidget_->setAlignment(Qt::AlignCenter);
-    viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     viewWidget_->setMouseHandler(viewWidgetMouseHandler_);
 
     editWidgetMouseHandlerHelper_ = new LungMatrixMouseHandlerHelper;
@@ -455,7 +415,7 @@ void MainWindow::setupDicomWidgets()
     editWidget_ = new DicomGriddedViewWidget(BASE_GRID_STEP_CM);
     editWidget_->setCellSizeOnScreenCm(DEFAULT_CELL_SIZE_ON_SCREEN_CM);
     editWidget_->setAlignment(Qt::AlignCenter);
-    editWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    editWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     editWidget_->setMouseHandler(editWidgetMouseHandlerHelper_);
     editWidget_->setGridStepMultiplier(GRID_MULTIPLIERS[DEFAULT_GRID_MULTIPLIER_INDEX]);
 
@@ -516,11 +476,6 @@ void MainWindow::setupToolsLayout()
 
 void MainWindow::setupWorkAreaLayout()
 {
-    if (polygonToolMouseHandler_ != nullptr) {
-        qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
-        distanceFromTwoPointsWidget_->setText(strutils::realToString(distanceBetweenTwoPoints));
-    }
-
     setupDicomWidgets();
     setupLungVolumeInfoLayout();
 
@@ -571,21 +526,17 @@ void MainWindow::setupNavigationLayout()
 //    rulerCheckBox_->setChecked(false);
 //    connect(rulerCheckBox_, SIGNAL(stateChanged(int)), this, SLOT(onRulerCheckBoxStateChanged(int)));
 
-    QVBoxLayout* fileInfoVBox = new QVBoxLayout();
-    fileInfoVBox->addWidget(patientsLabel);
-    fileInfoVBox->addWidget(patientsSelectCombo_);
-    fileInfoVBox->addWidget(studiesLabel);
-    fileInfoVBox->addWidget(studiesSelectCombo_);
-    fileInfoVBox->addWidget(seriesLabel);
-    fileInfoVBox->addWidget(seriesSelectCombo_);
-
     navigationLayout_ = new QHBoxLayout;
-    navigationLayout_->addLayout(fileInfoVBox);
+    navigationLayout_->addWidget(patientsLabel);
+    navigationLayout_->addWidget(patientsSelectCombo_);
+    navigationLayout_->addWidget(studiesLabel);
+    navigationLayout_->addWidget(studiesSelectCombo_);
+    navigationLayout_->addWidget(seriesLabel);
+    navigationLayout_->addWidget(seriesSelectCombo_);
     navigationLayout_->addLayout(sliceLayout);
     navigationLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
     navigationLayout_->addWidget(scalingLabel);
     navigationLayout_->addWidget(scalingFactorSpinBox_);
-    navigationLayout_->setAlignment(Qt::AlignTop);
     //navigationLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
     //navigationLayout_->addWidget(rulerCheckBox_);
     navigationLayout_->addStretch();
@@ -625,26 +576,6 @@ void MainWindow::setupLungVolumeInfoLayout()
     QLabel* infectedVolumePartUnitsLabel = new QLabel(tr("%"));
     infectedVolumePartUnitsLabel->setMaximumWidth(30);
 
-    // Начало: Абросов Сергей
-    QLabel* densityOfHounsfieldPartLabel = new QLabel(tr("Density Hounsfield:"));
-    densityOfHounsfieldPartLabel->setMaximumWidth(100);
-    densityOfHounsfieldWidget_ = new QLineEdit;
-    densityOfHounsfieldWidget_->setText("None");
-    densityOfHounsfieldWidget_->setReadOnly(true);
-    densityOfHounsfieldWidget_->setMaximumWidth(100);
-    QLabel* densityHounsfieldPartUnitsLabel = new QLabel(tr("HU"));
-    densityHounsfieldPartUnitsLabel->setMaximumWidth(30);
-
-    QLabel* distanceFromTwoPointsLabel = new QLabel(tr("Distance (2 points):"));
-    distanceFromTwoPointsLabel->setMaximumWidth(100);
-    distanceFromTwoPointsWidget_ = new QLineEdit;
-    distanceFromTwoPointsWidget_->setText("0.0");
-    distanceFromTwoPointsWidget_->setReadOnly(true);
-    distanceFromTwoPointsWidget_->setMaximumWidth(100);
-    QLabel* distanceFromTwoPointsUnitsLabel = new QLabel(tr("cm"));
-    distanceFromTwoPointsUnitsLabel->setMaximumWidth(30);
-    // Конец: Абросов Сергей
-
     lungVolumeInfoLayout_ = new QGridLayout;
     lungVolumeInfoLayout_->addWidget(totalVolumeLabel, 0, 0);
     lungVolumeInfoLayout_->addWidget(totalVolumeAutoUpdateCheckBox_, 1, 0);
@@ -656,29 +587,15 @@ void MainWindow::setupLungVolumeInfoLayout()
     lungVolumeInfoLayout_->addWidget(infectedVolumePartLabel, 5, 0);
     lungVolumeInfoLayout_->addWidget(infectedVolumePartWidget_, 6, 0);
     lungVolumeInfoLayout_->addWidget(infectedVolumePartUnitsLabel, 6, 1);
-    // Начало: Абросов Сергей
-    lungVolumeInfoLayout_->addWidget(densityOfHounsfieldPartLabel, 7, 0);
-    lungVolumeInfoLayout_->addWidget(densityOfHounsfieldWidget_, 8, 0);
-    lungVolumeInfoLayout_->addWidget(densityHounsfieldPartUnitsLabel, 8, 1);
-
-    lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsLabel, 9, 0);
-    lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsWidget_, 10, 0);
-    lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsUnitsLabel, 10, 1);
-    // Конец: Абросов Сергей
-    lungVolumeInfoLayout_->addItem(new QSpacerItem(0, 0), 11, 0);
-    lungVolumeInfoLayout_->setRowStretch(11, 1);
+    lungVolumeInfoLayout_->addItem(new QSpacerItem(0, 0), 7, 0);
+    lungVolumeInfoLayout_->setRowStretch(7, 1);
 }
 
 void MainWindow::createActions()
 {
-    openAction_ = new QAction(tr("Open DICOM folder"), this);
-    openAction_->setStatusTip(tr("Open DICOM folder"));
+    openAction_ = new QAction(tr("Open..."), this);
+    openAction_->setStatusTip(tr("Open DICOM file"));
     connect(openAction_, SIGNAL(triggered()), this, SLOT(executeOpenProjectDirDialog()));
-
-    openProjectAction_ = new QAction(tr("Open project"), this);
-    openProjectAction_->setStatusTip(tr("Open project folder"));
-    // TODO: Change the method member
-    connect(openProjectAction_, SIGNAL(triggered()), this, SLOT(executeOpenProjectFiles()));
 
     exportRawImageAction_ = new QAction(tr("Export raw image"), this);
     exportRawImageAction_->setStatusTip(tr("Render current slice to image file"));
@@ -687,10 +604,6 @@ void MainWindow::createActions()
     exportImageWithMarksAction_ = new QAction(tr("Export image with marks"), this);
     exportImageWithMarksAction_->setStatusTip(tr("Render current slice with marked infected area to image file"));
     connect(exportImageWithMarksAction_, SIGNAL(triggered()), this, SLOT(executeExportImageWithMarksDialog()));
-
-    saveProjectAction_ = new QAction(tr("Save project"), this);
-    saveProjectAction_->setStatusTip(tr("Save the hole project"));
-    connect(saveProjectAction_, SIGNAL(triggered()), this, SLOT(executeSaveProjectFiles()));
 
     exitAction_ = new QAction(tr("E&xit"), this);
     exitAction_->setShortcuts(QKeySequence::Quit);
@@ -702,10 +615,8 @@ void MainWindow::createMenus()
 {
     fileMenu_ = menuBar()->addMenu(tr("&File"));
     fileMenu_->addAction(openAction_);
-    fileMenu_->addAction(openProjectAction_);
     fileMenu_->addAction(exportRawImageAction_);
     fileMenu_->addAction(exportImageWithMarksAction_);
-    fileMenu_->addAction(saveProjectAction_);
     fileMenu_->addSeparator();
     fileMenu_->addAction(exitAction_);
 
@@ -719,7 +630,6 @@ void MainWindow::updateMenuActions()
 
     exportRawImageAction_->setEnabled(sliceIsAvailable);
     exportImageWithMarksAction_->setEnabled(sliceIsAvailable);
-    saveProjectAction_->setEnabled(sliceIsAvailable);
 }
 
 void MainWindow::resetProject()
@@ -769,38 +679,9 @@ void MainWindow::renderImageWithMarksToFile(const QString& filePath)
     renderPixmapToFile(pixmap, filePath);
 }
 
-void MainWindow::saveProjectFies(const DicomSeriePtr& serie, const QString& dirPath)
-{
-
-    editWidget_->pixmap()->save(dirPath + QDir::separator() + "pixmap1234134124");
-//    for(int i = 0; i < serie->getSliceCount(); ++i)
-//    {
-//        const QPixmap pixmap = serie->getSlice(i)->pixmap();
-//
-//        renderPixmapToFile(pixmap, dirPath + "/" + "image" + QString::number(i + 1));
-//    }
-
-//    QDir dir(projectPath_);
-
-//    foreach (QString d, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
-//    {
-//        QString dst_path = dirPath + QDir::separator() + d;
-//        dir.mkpath(dst_path);
-//        copyPath(projectPath_ + QDir::separator() + d, dst_path);
-//    }
-
-
-//    QStringList files = dir.entryList(QDir::Files);
-//    for(int i = 0; i < files.count(); ++i)
-//    {
-//        QFile::copy(projectPath_ + QDir::separator() + files[i],
-//                    dirPath + QDir::separator() + files[i]);
-//    }
-}
-
 void MainWindow::renderPixmapToFile(const QPixmap& pixmap, const QString& filePath)
 {
-    pixmap.save(filePath + ".png","PNG");
+    pixmap.save(filePath);
 }
 
 void MainWindow::updateScalingFactorSpinBox()

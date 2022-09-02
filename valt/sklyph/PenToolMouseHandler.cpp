@@ -4,11 +4,6 @@
 
 const QPoint INVALID_GRID_CELL(-1, -1);
 
-// Начало: Абросов Сергей
-// #include <bits/stdc++.h>
-// using namespace std;
-// Конец: Абросов Сергей
-
 namespace sklyph {
 namespace valt {
 
@@ -65,18 +60,6 @@ void PenToolMouseHandler::processMousePressEvent(QMouseEvent* event)
     processMouseMoveEvent(event);
 }
 
-// Начало: Абросов Сергей.
-long double getHounsfieldDensity(QRgb selectedPixel) {
-    int red = qRed(selectedPixel);
-
-    long double copyRed = red;
-    const long double finalHounsfieldDensity = -1000 + (4000 * copyRed) / 255;
-
-    //printf("%Lf", finalHounsfieldDensity);
-    return finalHounsfieldDensity;
-}
-// Конец: Абросов Сергей.
-
 void PenToolMouseHandler::processMouseMoveEvent(QMouseEvent* event)
 {
     const QPoint pos = event->pos();
@@ -98,12 +81,6 @@ void PenToolMouseHandler::processMouseMoveEvent(QMouseEvent* event)
     griddedView_->triggerStateActionInPixel(pos, penState);
 
     lastRegisteredGridCell_ = gridCell;
-
-    // Начало: Абросов Сергей.
-    // Считаем плотность в выбранной точке.
-    QRgb selectedPixel = this->view_->getImage().pixel(pos.x(), pos.y());
-    densityOfHounsfield = getHounsfieldDensity(selectedPixel);
-    // Конец: Абросов Сергей.
 
     event->accept();
 }
@@ -130,22 +107,6 @@ GcellState PenToolMouseHandler::getPenStateByMouseButtons(bool isLmbPressed, boo
 
     return penState;
 }
-
-// Начало: Абросов Сергей.
-//long double getHounsfieldDensity(QColor selectedPixel) {
-//    const long double ourAttenuationСoefficient = ;
-//    const long double waterAttenuationСoefficient = ;
-//    const long double airAttenuationСoefficient = ;
-//    const long double numberCoefficient = 1000.0;
-//
-//    const long double numerator = ourAttenuationСoefficient;
-//    const long double denominator = ;
-//
-//    const long double finalHounsfieldDensity = (numerator / denominator) * numberCoefficient;
-//
-//    return finalHounsfieldDensity;
-//}
-// Конец: Абросов Сергей.
 
 } // namespace valt
 } // namespace sklyph

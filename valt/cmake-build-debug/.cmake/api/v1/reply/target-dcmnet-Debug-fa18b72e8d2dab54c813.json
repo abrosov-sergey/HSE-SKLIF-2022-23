@@ -1,0 +1,728 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/deploy/debug/libdcmnet.dylib"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"install",
+			"target_link_libraries",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"cmake/build_shared_lib.cmake",
+			"qdcm/dcmnet/CMakeLists.txt",
+			"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.22/Modules/UseQt4.cmake",
+			"cmake/add_includes.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 53,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 69,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 54,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 2
+			},
+			{
+				"file" : 2,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 85,
+				"parent" : 8
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 85,
+				"parent" : 8
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 6,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 7,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 2
+			},
+			{
+				"file" : 3,
+				"parent" : 14
+			},
+			{
+				"command" : 5,
+				"file" : 3,
+				"line" : 4,
+				"parent" : 15
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 21,
+				"parent" : 8
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 89,
+				"parent" : 8
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 89,
+				"parent" : 8
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=gnu++11 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -fPIC   -fPIC -Wall"
+				},
+				{
+					"fragment" : "-std=c++11"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "QT_FATAL_ASSERT"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"define" : "VERSION=\"0.0.0\""
+				},
+				{
+					"define" : "dcmnet_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 12,
+					"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/qdcm/dcmnet/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/cmake-build-debug/qdcm/dcmnet"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "/Users/sergeyabrosov/Desktop/Project/sklif-2022-23/valt/qdcm/dcmcore/include"
+				},
+				{
+					"backtrace" : 17,
+					"isSystem" : true,
+					"path" : "/usr/local/include"
+				},
+				{
+					"backtrace" : 17,
+					"isSystem" : true,
+					"path" : "/usr/local/lib/QtCore.framework"
+				},
+				{
+					"backtrace" : 18,
+					"isSystem" : true,
+					"path" : "/usr/local/include/QtNetwork"
+				},
+				{
+					"backtrace" : 19,
+					"isSystem" : true,
+					"path" : "/usr/local/lib/QtCore.framework/Headers"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 6,
+			"id" : "dcmcore::@0da9e2a8f835f52dc4b3"
+		}
+	],
+	"id" : "dcmnet::@2c60f12b22738cda7e46",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 5,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 5,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-F/usr/local/lib",
+				"role" : "frameworkPath"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtNetwork",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtCore",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "../deploy/debug/libdcmcore.dylib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtXml",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "QtCore",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "dcmnet",
+	"nameOnDisk" : "libdcmnet.dylib",
+	"paths" : 
+	{
+		"build" : "qdcm/dcmnet",
+		"source" : "qdcm/dcmnet"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				46,
+				47,
+				48,
+				49,
+				50,
+				51,
+				52,
+				53
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				54
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAAbort.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAAssociateAccept.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAAssociateReject.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAAssociateRequest.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAReleaseRequest.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAReleaseResponse.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAbstractSyntax.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmAcceptedPresentationContext.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmApplicationContext.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmCEchoRequest.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmCEchoResponse.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmCommunicator.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmDimseMessage.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmDimsePriorityRequest.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmDimseRequest.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmDimseResponse.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmNetStream.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDUImplementationClassUID.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDUImplementationVersionName.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDUItemList.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDUMaxLength.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDUUserInfo.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDVItem.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPDataTf.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmPresentationContext.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "qdcm/dcmnet/cpp/DcmSCU.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/qdcm/dcmnet/include/moc_DcmSCU.cxx",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAAbort.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAAssociateAccept.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAAssociateReject.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAAssociateRequest.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAReleaseRequest.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAReleaseResponse.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAbstractSyntax.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmAcceptedPresentationContext.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmApplicationContext.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmCEchoRequest.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmCEchoResponse.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmCommunicator.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmDimseMessage.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmDimsePriorityRequest.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmDimseRequest.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmDimseResponse.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmNetApi.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmNetStream.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDUImplementationClassUID.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDUImplementationVersionName.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDUItemList.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDUMaxLength.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDUUserInfo.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDVItem.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPDataTf.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmPresentationContext.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "qdcm/dcmnet/include/DcmSCU.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/qdcm/dcmnet/include/moc_DcmSCU.cxx.rule",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}
