@@ -439,7 +439,8 @@ void MainWindow::setupDicomWidgets()
 
     viewWidget_ = new DicomViewWidget;
     viewWidget_->setAlignment(Qt::AlignCenter);
-    viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    //viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    viewWidget_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     viewWidget_->setMouseHandler(viewWidgetMouseHandler_);
 
     editWidgetMouseHandlerHelper_ = new LungMatrixMouseHandlerHelper;
