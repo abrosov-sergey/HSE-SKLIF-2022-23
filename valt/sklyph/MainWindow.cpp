@@ -221,6 +221,7 @@ void MainWindow::updateVolumesInGui()
     // Начало: Абросов Сергей
     qreal densityOfHounsfield = penToolMouseHandler_->densityOfHounsfield;
     qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
+    qreal densityOfHounsfieldInPolygon = polygonToolMouseHandler_->densityOfHounsfieldInPolygon;
     // Конец: Абросов Сергей
 
     const auto bs = blockSignals(true);
@@ -231,6 +232,7 @@ void MainWindow::updateVolumesInGui()
     // Начало: Абросов Сергей
     densityOfHounsfieldWidget_->setText(strutils::realToString(densityOfHounsfield));
     distanceFromTwoPointsWidget_->setText(strutils::realToString(distanceBetweenTwoPoints));
+    densityOfHounsfieldInPolygonWidget_->setText(strutils::realToString(densityOfHounsfieldInPolygon));
     // Конец: Абросов Сергей
 
     blockSignals(bs);
@@ -517,11 +519,6 @@ void MainWindow::setupToolsLayout()
 
 void MainWindow::setupWorkAreaLayout()
 {
-    if (polygonToolMouseHandler_ != nullptr) {
-        qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
-        distanceFromTwoPointsWidget_->setText(strutils::realToString(distanceBetweenTwoPoints));
-    }
-
     setupDicomWidgets();
     setupLungVolumeInfoLayout();
 
@@ -627,7 +624,7 @@ void MainWindow::setupLungVolumeInfoLayout()
     infectedVolumePartUnitsLabel->setMaximumWidth(30);
 
     // Начало: Абросов Сергей
-    QLabel* densityOfHounsfieldPartLabel = new QLabel(tr("Density Hounsfield:"));
+    QLabel* densityOfHounsfieldPartLabel = new QLabel(tr("Point Hounsfield:"));
     densityOfHounsfieldPartLabel->setMaximumWidth(100);
     densityOfHounsfieldWidget_ = new QLineEdit;
     densityOfHounsfieldWidget_->setText("None");
@@ -644,6 +641,15 @@ void MainWindow::setupLungVolumeInfoLayout()
     distanceFromTwoPointsWidget_->setMaximumWidth(100);
     QLabel* distanceFromTwoPointsUnitsLabel = new QLabel(tr("cm"));
     distanceFromTwoPointsUnitsLabel->setMaximumWidth(30);
+
+    QLabel* densityOfHounsfieldInPolygonLabel = new QLabel(tr("Polygon Hounsfield:"));
+    densityOfHounsfieldInPolygonLabel->setMaximumWidth(100);
+    densityOfHounsfieldInPolygonWidget_ = new QLineEdit;
+    densityOfHounsfieldInPolygonWidget_->setText("None");
+    densityOfHounsfieldInPolygonWidget_->setReadOnly(true);
+    densityOfHounsfieldInPolygonWidget_->setMaximumWidth(100);
+    QLabel* densityHounsfieldInPolygonPartUnitsLabel = new QLabel(tr("HU"));
+    densityHounsfieldInPolygonPartUnitsLabel->setMaximumWidth(30);
     // Конец: Абросов Сергей
 
     lungVolumeInfoLayout_ = new QGridLayout;
@@ -665,9 +671,13 @@ void MainWindow::setupLungVolumeInfoLayout()
     lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsLabel, 9, 0);
     lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsWidget_, 10, 0);
     lungVolumeInfoLayout_->addWidget(distanceFromTwoPointsUnitsLabel, 10, 1);
+
+    lungVolumeInfoLayout_->addWidget(densityOfHounsfieldInPolygonLabel, 11, 0);
+    lungVolumeInfoLayout_->addWidget(densityOfHounsfieldInPolygonWidget_, 12, 0);
+    lungVolumeInfoLayout_->addWidget(densityHounsfieldInPolygonPartUnitsLabel, 12, 1);
     // Конец: Абросов Сергей
-    lungVolumeInfoLayout_->addItem(new QSpacerItem(0, 0), 11, 0);
-    lungVolumeInfoLayout_->setRowStretch(11, 1);
+    lungVolumeInfoLayout_->addItem(new QSpacerItem(0, 0), 13, 0);
+    lungVolumeInfoLayout_->setRowStretch(13, 1);
 }
 
 void MainWindow::createActions()

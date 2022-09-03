@@ -66,7 +66,6 @@ void PenToolMouseHandler::processMousePressEvent(QMouseEvent* event)
 }
 
 // Начало: Абросов Сергей.
-// КОСТЫЛЬНО, ПОКА ЧТО РАБОТАЕТ ДЛЯ ЯЧЕЕК 1 НА 1 CM.
 void PenToolMouseHandler::getHounsfieldDensity(QImage image, QPoint pos) {
     // Константа, основанная на размерах QImage
     const int number = std::trunc(12 * griddedView_->gridStepCm());

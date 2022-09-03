@@ -48,6 +48,8 @@ public:
     void addTemporaryPolygonVertex(const QPoint& gcell);
     void clearTemporaryPolygon();
 
+    QPoint getGcellCenterOnScreen(const QPoint& gcell) const;
+
 signals:
     void matrixUpdated(const GcellMatrix& matrix);
 
@@ -73,8 +75,6 @@ private:
 
     QRect getGcellRectOnScreen(const QPoint& gcell) const;
     QRect getRectOnScreenByRectCm(const QRectF& rectCm) const;
-
-    QPoint getGcellCenterOnScreen(const QPoint& gcell) const;
 
     QVector<QPoint> getGcellIndicesForScreenPixel(const QPoint& pixel) const;
 
