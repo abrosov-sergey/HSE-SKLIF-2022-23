@@ -28,6 +28,9 @@ const QBrush GCELL_FULL_INFECTED_BRUSH(GCELL_FULL_INFECTED_COLOR, Qt::SolidPatte
 const QBrush GCELL_HALF_INFECTED_BRUSH(GCELL_HALF_INFECTED_COLOR, Qt::SolidPattern);
 const QBrush GCELL_HEALTHY_BRUSH(GCELL_HEALTHY_COLOR, Qt::SolidPattern);
 
+const QColor LINE_COLOR(205, 0, 173, 255);
+const QPen POYGON_PEN(LINE_COLOR, 5);
+
 const int GRID_LAYER_INDEX = 112;
 const int GCELL_LAYER_INDEX = 223;
 const int TEMPORARY_LAYER_INDEX = 300;
@@ -145,7 +148,8 @@ void DicomGriddedViewWidget::drawTemporaryPolygonOnCanvas(QPainter& painter) con
         return;
     }
 
-    painter.setPen(TEMPORARY_POLYGON_PEN);
+    //painter.setPen(TEMPORARY_POLYGON_PEN);
+    painter.setPen(POYGON_PEN);
     painter.setBrush(TEMPORARY_POLYGON_BRUSH);
 
     const auto p0 = getGcellCenterOnScreen(tempPolygonGcells_[0]);

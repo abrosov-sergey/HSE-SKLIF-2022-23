@@ -142,6 +142,7 @@ private: // FIELDS
     QLineEdit* infectedVolumePartWidget_;
     QLineEdit* densityOfHounsfieldWidget_;
     QLineEdit* distanceFromTwoPointsWidget_;
+    QLineEdit* densityOfHounsfieldInPolygonWidget_;
 
     QMenu* fileMenu_;
     QAction* openAction_;

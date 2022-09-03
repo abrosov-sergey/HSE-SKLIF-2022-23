@@ -96,17 +96,12 @@ void PolygonToolMouseHandler::processMousePressEvent(QMouseEvent* event)
 
     addGcellVertice(posGcell);
     event->accept();
-    // Правки начало, Сергей Абросов
-// Расстояние между двумя последними отмеченными точками в полигоне.
+
+    // Расстояние между двумя последними отмеченными точками в полигоне.
     if (gcellVertices_.size() >= 2) {
-//        std::cout << std::fixed << std::showpoint << std::setprecision(9);
-//        std::cout << GetDistanceBetweenTwoPoints(gcellVertices_[gcellVertices_.size() - 2],
-//                                                 gcellVertices_[gcellVertices_.size() - 1]) /*/
-//                                             (double (scalingFactorSpinBox_->value()) / 100)*/ << std::endl;
         distanceBetweenTwoPoints = GetDistanceBetweenTwoPoints(gcellVertices_[gcellVertices_.size() - 2],
                                                                gcellVertices_[gcellVertices_.size() - 1]);
     }
-// Правки конец, Сергей Абросов
 }
 
 GcellState PolygonToolMouseHandler::getPenStateByMouseButtons(Qt::MouseButtons buttons) const
@@ -205,6 +200,61 @@ int PolygonToolMouseHandler::getCenterVerticalLineX() const
     return sumX / gcellVertices_.size();
 }
 
+qreal PolygonToolMouseHandler::getDensityInPolygon(const QList<QPoint>&) {
+    qreal densitySum = 0.0;
+
+    for (int i = 0; i < pointsInPolygon.size(); ++i) {
+        densitySum += getHounsfieldDensityFromGcell(this->view_->getImage(), griddedView_->getGcellCenterOnScreen(pointsInPolygon[i]));
+    }
+
+    return densitySum / pointsInPolygon.size();
+}
+
+// Начало: Абросов Сергей.
+qreal PolygonToolMouseHandler::getHounsfieldDensityFromGcell(QImage image, QPoint pos) {
+    // Константа, основанная на размерах QImage
+    const int number = std::trunc(12 * griddedView_->gridStepCm());
+
+    // Левая верхняя и правая нижняя позиции выбранной ячейки.
+    const QPoint positionLeftCorner = QPoint((pos.x() / number - (pos.x() % number == 0)) * number,
+                                             (pos.y() / number - (pos.y() % number == 0)) * number);
+
+    const QPoint positionRightCorner = QPoint(positionLeftCorner.x() + number, positionLeftCorner.y() + number);
+
+    // Сумма плотностей Хаунсфилда в выбранной области.
+    long double sumHounsfieldDensity = 0.0;
+
+    // Пересчитываем среднюю плотность в выбранной области.
+    for (int x = positionLeftCorner.x(); x <= positionRightCorner.x(); ++x) {
+        for (int y = positionLeftCorner.y(); y <= positionRightCorner.y(); ++y) {
+            // Составляющая красного в RGB.
+            const int redProportion = qRed(image.pixel(x, y));
+            const long double copyRedProportion = redProportion;
+
+            // Считаем плотность Хаунсфилда в точке (x, y).
+            const long double nowHounsfieldDensity = -1000 + (4000 * copyRedProportion) / 255;
+
+            // Прибавляем к сумме всех ранее посчитанных плотностей.
+            sumHounsfieldDensity += nowHounsfieldDensity;
+        }
+    }
+
+    // Количество точек, вошедших в подчест.
+    const long double countPointsInCells = (positionRightCorner.x() - positionLeftCorner.x() + 1) * (positionRightCorner.y() - positionLeftCorner.y() + 1);
+
+    // Считаем среднее значение (сумму делим на количество точек вошедших в подсчет).
+    const long double finalHounsfieldDensity = sumHounsfieldDensity / countPointsInCells;
+
+    return finalHounsfieldDensity;
+}
+// Конец: Абросов Сергей.
+
+void PolygonToolMouseHandler::updateDensityInPolygon(const qreal density) {
+    densityOfHounsfieldInPolygon = density;
+
+    emit updateChanges();
+}
+
 void PolygonToolMouseHandler::invertRightGcells(const QPoint& p1, const QPoint& p2, int vertLineX)
 {
     if (p1.y() == p2.y()) {
@@ -235,6 +285,8 @@ void PolygonToolMouseHandler::invertRightGcells(const QPoint& p1, const QPoint& 
             invertLine(y, vertLineX, x);
         }
     }
+
+    updateDensityInPolygon(getDensityInPolygon(pointsInPolygon));
 }
 
 void PolygonToolMouseHandler::invertRect(int x0, int y0, int x1, int y1)
@@ -263,8 +315,11 @@ void PolygonToolMouseHandler::invertRectNormalized(int x0, int y0, int x1, int y
 
 void PolygonToolMouseHandler::invertLine(int y, int x0, int x1)
 {
+    pointsInPolygon.push_back(QPoint(x0, y));
     gcellStates_[x0][y] = true;
+
     for (int x = x0 + 1; x < x1; x++) {
+        pointsInPolygon.push_back(QPoint(x, y));
         invertGcell(x, y);
     }
 }

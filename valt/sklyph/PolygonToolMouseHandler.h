@@ -6,6 +6,7 @@
 
 #include <QImage>
 #include <QMouseEvent>
+#include <cmath>
 
 namespace sklyph {
 namespace valt {
@@ -39,6 +40,8 @@ public:
 
     // Начало: Абросов Сергей
     qreal distanceBetweenTwoPoints = 0.0;
+    qreal densityOfHounsfieldInPolygon = 0.0;
+    QList<QPoint> pointsInPolygon;
     // Конец: Абросов Сергей
 private: // methods
     void processMousePressEvent(QMouseEvent* event);
@@ -60,6 +63,10 @@ private: // methods
     void invertGcell(int x, int y);
     qreal lineCoef(const QPoint& p1, const QPoint& p2);
 
+    qreal getDensityInPolygon(const QList<QPoint>&);
+    void updateDensityInPolygon(const qreal);
+    qreal getHounsfieldDensityFromGcell(const QImage, const QPoint);
+
 private: // fields
     DicomGriddedViewWidget* griddedView_;
 
@@ -69,6 +76,9 @@ private: // fields
 
     QList<QPoint> gcellVertices_;
     QVector<QVector<bool>> gcellStates_;
+
+signals:
+    void updateChanges();
 };
 
 } // namespace valt
