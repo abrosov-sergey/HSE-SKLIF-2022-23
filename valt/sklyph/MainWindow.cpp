@@ -465,6 +465,7 @@ void MainWindow::setupDicomWidgets()
     connect(editWidget_, SIGNAL(sliceUpdated()), viewWidget_, SLOT(updatePixmap()));
 
     connect(editWidget_, SIGNAL(matrixUpdated(const GcellMatrix&)), this, SLOT(onSliceMatrixUpdated(const GcellMatrix&)));
+    connect(penToolMouseHandler_, SIGNAL(densityChanged()), this, SLOT(updateVolumesInGui()));
 }
 
 void MainWindow::setupToolsLayout()

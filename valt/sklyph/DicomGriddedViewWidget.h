@@ -65,8 +65,8 @@ private:
     void drawGcellsOnCanvas(QPainter& painter) const;
     void drawGcellsOnCanvas(QPainter& painter, const GcellSet& gcells, const QBrush& brush) const;
     void drawGridOnCanvas(QPainter& painter) const;
-    void drawTemporaryObjectsOnCanvas(QPainter& painter);
-    void drawTemporaryPolygonOnCanvas(QPainter& painter);
+    void drawTemporaryObjectsOnCanvas(QPainter& painter) const;
+    void drawTemporaryPolygonOnCanvas(QPainter& painter) const;
 
     void drawGcellsOnPixmap(QPainter& painter) const;
     void drawGcellsOnPixmap(QPainter& painter, const GcellSet& gcells, const QBrush& brush) const;

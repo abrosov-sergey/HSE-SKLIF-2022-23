@@ -4,6 +4,7 @@
 #include "AbstractToolMouseHandler.h"
 
 #include <QMouseEvent>
+#include <cmath>
 
 namespace sklyph {
 namespace valt {
@@ -21,9 +22,7 @@ class PenToolMouseHandler: public AbstractToolMouseHandler
 public:
     explicit PenToolMouseHandler();
     ~PenToolMouseHandler() override = default;
-
     void processMouseEvent(QMouseEvent* event) override;
-
     void setDicomView(DicomViewWidget* view) override;
 
     void reset() override;
@@ -31,7 +30,8 @@ public:
     void setMode(PenToolMode mode);
 
     // Начало: Абросов Сергей
-    qreal densityOfHounsfield = -10007.0;
+    qreal densityOfHounsfield = 0.0;
+    void getHounsfieldDensity(QImage image, QPoint pos);
     // Конец: Абросов Сергей
 private: // methods
     void processMousePressEvent(QMouseEvent* event);
@@ -45,6 +45,9 @@ private: // fields
     PenToolMode mode_;
 
     QPoint lastRegisteredGridCell_;
+
+signals:
+    void densityChanged();
 };
 
 } // namespace valt

@@ -144,7 +144,6 @@ void PolygonToolMouseHandler::finishDrawingPolygon()
     clearVertices();
 }
 
-// TODO: понять почему странно заполняется
 void PolygonToolMouseHandler::fillPolygon()
 {
     if (gcellVertices_.size() < 3) {

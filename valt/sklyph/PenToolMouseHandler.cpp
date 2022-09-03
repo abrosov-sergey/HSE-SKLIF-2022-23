@@ -66,14 +66,45 @@ void PenToolMouseHandler::processMousePressEvent(QMouseEvent* event)
 }
 
 // Начало: Абросов Сергей.
-long double getHounsfieldDensity(QRgb selectedPixel) {
-    int red = qRed(selectedPixel);
+// КОСТЫЛЬНО, ПОКА ЧТО РАБОТАЕТ ДЛЯ ЯЧЕЕК 1 НА 1 CM.
+void PenToolMouseHandler::getHounsfieldDensity(QImage image, QPoint pos) {
+    // Константа, основанная на размерах QImage
+    const int number = std::trunc(12 * griddedView_->gridStepCm());
 
-    long double copyRed = red;
-    const long double finalHounsfieldDensity = -1000 + (4000 * copyRed) / 255;
+    // Левая верхняя и правая нижняя позиции выбранной ячейки.
+    const QPoint positionLeftCorner = QPoint((pos.x() / number - (pos.x() % number == 0)) * number,
+                                             (pos.y() / number - (pos.y() % number == 0)) * number);
 
-    //printf("%Lf", finalHounsfieldDensity);
-    return finalHounsfieldDensity;
+    const QPoint positionRightCorner = QPoint(positionLeftCorner.x() + number, positionLeftCorner.y() + number);
+
+    // Сумма плотностей Хаунсфилда в выбранной области.
+    long double sumHounsfieldDensity = 0.0;
+
+    // Пересчитываем среднюю плотность в выбранной области.
+    for (int x = positionLeftCorner.x(); x <= positionRightCorner.x(); ++x) {
+        for (int y = positionLeftCorner.y(); y <= positionRightCorner.y(); ++y) {
+            // Составляющая красного в RGB.
+            const int redProportion = qRed(image.pixel(x, y));
+            const long double copyRedProportion = redProportion;
+
+            // Считаем плотность Хаунсфилда в точке (x, y).
+            const long double nowHounsfieldDensity = -1000 + (4000 * copyRedProportion) / 255;
+
+            // Прибавляем к сумме всех ранее посчитанных плотностей.
+            sumHounsfieldDensity += nowHounsfieldDensity;
+        }
+    }
+
+    // Количество точек, вошедших в подчест.
+    const long double countPointsInCells = (positionRightCorner.x() - positionLeftCorner.x() + 1) * (positionRightCorner.y() - positionLeftCorner.y() + 1);
+
+    // Считаем среднее значение (сумму делим на количество точек вошедших в подсчет).
+    const long double finalHounsfieldDensity = sumHounsfieldDensity / countPointsInCells;
+
+    // Обновляем плотность в выбранной области.
+    densityOfHounsfield = finalHounsfieldDensity;
+
+    emit densityChanged();
 }
 // Конец: Абросов Сергей.
 
@@ -99,11 +130,7 @@ void PenToolMouseHandler::processMouseMoveEvent(QMouseEvent* event)
 
     lastRegisteredGridCell_ = gridCell;
 
-    // Начало: Абросов Сергей.
-    // Считаем плотность в выбранной точке.
-    QRgb selectedPixel = this->view_->getImage().pixel(pos.x(), pos.y());
-    densityOfHounsfield = getHounsfieldDensity(selectedPixel);
-    // Конец: Абросов Сергей.
+    getHounsfieldDensity(this->view_->getImage(), pos);
 
     event->accept();
 }
@@ -130,22 +157,5 @@ GcellState PenToolMouseHandler::getPenStateByMouseButtons(bool isLmbPressed, boo
 
     return penState;
 }
-
-// Начало: Абросов Сергей.
-//long double getHounsfieldDensity(QColor selectedPixel) {
-//    const long double ourAttenuationСoefficient = ;
-//    const long double waterAttenuationСoefficient = ;
-//    const long double airAttenuationСoefficient = ;
-//    const long double numberCoefficient = 1000.0;
-//
-//    const long double numerator = ourAttenuationСoefficient;
-//    const long double denominator = ;
-//
-//    const long double finalHounsfieldDensity = (numerator / denominator) * numberCoefficient;
-//
-//    return finalHounsfieldDensity;
-//}
-// Конец: Абросов Сергей.
-
 } // namespace valt
 } // namespace sklyph
