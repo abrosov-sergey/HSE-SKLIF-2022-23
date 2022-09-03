@@ -7,6 +7,8 @@
 #include <QImage>
 #include <QMouseEvent>
 #include <cmath>
+#include <algorithm>
+#include <iostream>
 
 namespace sklyph {
 namespace valt {
@@ -42,6 +44,7 @@ public:
     qreal distanceBetweenTwoPoints = 0.0;
     qreal densityOfHounsfieldInPolygon = 0.0;
     QList<QPoint> pointsInPolygon;
+    int maxXPosition = -100000;
     // Конец: Абросов Сергей
 private: // methods
     void processMousePressEvent(QMouseEvent* event);

@@ -147,6 +147,11 @@ void PolygonToolMouseHandler::fillPolygon()
 
     const auto width = griddedView_->getNumGcellsX();
 
+    maxXPosition = -100000;
+    for (int index = 0; index < gcellVertices_.size() - 1; index++) {
+        maxXPosition = std::max(maxXPosition, gcellVertices_[index].x());
+    }
+
     for (int index = 0; index < gcellVertices_.size() - 1; index++) {
         invertRightGcells(gcellVertices_[index], gcellVertices_[index + 1], width);
     }
@@ -261,7 +266,7 @@ void PolygonToolMouseHandler::invertRightGcells(const QPoint& p1, const QPoint& 
         return;
     }
     else if  (p1.x() == p2.x()) {
-        invertRect(p1.x(), p1.y(), vertLineX, p2.y());
+        invertRect(std::min(maxXPosition, p1.x()), p1.y(), std::min(maxXPosition, vertLineX), p2.y());
         return;
     }
 
@@ -280,9 +285,9 @@ void PolygonToolMouseHandler::invertRightGcells(const QPoint& p1, const QPoint& 
         x = x0 + dx;
 
         if (x <= vertLineX) {
-            invertLine(y, x, vertLineX);
+            invertLine(y, std::min(maxXPosition, x), std::min(maxXPosition, vertLineX));
         } else {
-            invertLine(y, vertLineX, x);
+            invertLine(y, std::min(maxXPosition, vertLineX), std::min(maxXPosition, x));
         }
     }
 
@@ -318,7 +323,7 @@ void PolygonToolMouseHandler::invertLine(int y, int x0, int x1)
     pointsInPolygon.push_back(QPoint(x0, y));
     gcellStates_[x0][y] = true;
 
-    for (int x = x0 + 1; x < x1; x++) {
+    for (int x = x0 + 1; x < std::min(maxXPosition, x1); x++) {
         pointsInPolygon.push_back(QPoint(x, y));
         invertGcell(x, y);
     }
@@ -326,7 +331,9 @@ void PolygonToolMouseHandler::invertLine(int y, int x0, int x1)
 
 void PolygonToolMouseHandler::invertGcell(int x, int y)
 {
-    gcellStates_[x][y] = !gcellStates_[x][y];
+    if (x <= maxXPosition) {
+        gcellStates_[x][y] = !gcellStates_[x][y];
+    }
 }
 
 qreal PolygonToolMouseHandler::lineCoef(const QPoint& p1, const QPoint& p2)
