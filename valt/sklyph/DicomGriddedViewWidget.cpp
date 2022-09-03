@@ -28,9 +28,6 @@ const QBrush GCELL_FULL_INFECTED_BRUSH(GCELL_FULL_INFECTED_COLOR, Qt::SolidPatte
 const QBrush GCELL_HALF_INFECTED_BRUSH(GCELL_HALF_INFECTED_COLOR, Qt::SolidPattern);
 const QBrush GCELL_HEALTHY_BRUSH(GCELL_HEALTHY_COLOR, Qt::SolidPattern);
 
-const QColor COLOR_LINE_IN_POLYGON = QColor(147, 0, 245, 255);
-const QPen PARAMETERS_PEN_IN_POLYGON = QPen(COLOR_LINE_IN_POLYGON, 5);
-
 const int GRID_LAYER_INDEX = 112;
 const int GCELL_LAYER_INDEX = 223;
 const int TEMPORARY_LAYER_INDEX = 300;
@@ -136,19 +133,19 @@ void DicomGriddedViewWidget::drawGridOnCanvas(QPainter& painter) const
     }
 }
 
-void DicomGriddedViewWidget::drawTemporaryObjectsOnCanvas(QPainter& painter)
+void DicomGriddedViewWidget::drawTemporaryObjectsOnCanvas(QPainter& painter) const
 {
     drawTemporaryPolygonOnCanvas(painter);
 }
 
-void DicomGriddedViewWidget::drawTemporaryPolygonOnCanvas(QPainter& painter)
+void DicomGriddedViewWidget::drawTemporaryPolygonOnCanvas(QPainter& painter) const
 {
     const int numTempPolygonIndices = tempPolygonGcells_.size();
     if (numTempPolygonIndices < 1) {
         return;
     }
 
-    painter.setPen(PARAMETERS_PEN_IN_POLYGON);
+    painter.setPen(TEMPORARY_POLYGON_PEN);
     painter.setBrush(TEMPORARY_POLYGON_BRUSH);
 
     const auto p0 = getGcellCenterOnScreen(tempPolygonGcells_[0]);
