@@ -50,6 +50,8 @@ public:
 
     QPoint getGcellCenterOnScreen(const QPoint& gcell) const;
 
+    QList<QRect>* previouslyLabledCellsHealth;
+    QList<QRect>* previouslyLabledCellsInfected;
 signals:
     void matrixUpdated(const GcellMatrix& matrix);
 
@@ -64,9 +66,9 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    void drawGcellsOnCanvas(QPainter& painter) const;
-    void drawGcellsOnCanvas(QPainter& painter, const GcellSet& gcells, const QBrush& brush) const;
-    void drawGridOnCanvas(QPainter& painter) const;
+    void drawGcellsOnCanvas(QPainter& painter);
+    void drawGcellsOnCanvas(QPainter& painter, const GcellSet& gcells, const QBrush& brush);
+    void drawGridOnCanvas(QPainter& painter);
     void drawTemporaryObjectsOnCanvas(QPainter& painter) const;
     void drawTemporaryPolygonOnCanvas(QPainter& painter) const;
 

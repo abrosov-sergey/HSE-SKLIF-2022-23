@@ -44,6 +44,9 @@ DicomGriddedViewWidget::DicomGriddedViewWidget(qreal baseGridStep,
 {
     reset();
 
+    previouslyLabledCellsHealth = new QList<QRect>();
+    previouslyLabledCellsInfected = new QList<QRect>();
+
     connect(this, SIGNAL(viewUpdated()), this, SLOT(repaint()));
 }
 
@@ -53,16 +56,16 @@ void DicomGriddedViewWidget::paintEvent(QPaintEvent* event)
     QPainter cellsPainter(&cellsLayer);
     drawGcellsOnCanvas(cellsPainter);
 
-    QPixmap gridLayer(this->size());
-    QPainter gridPainter(&gridLayer);
-    drawGridOnCanvas(gridPainter);
+    //QPixmap gridLayer(this->size());
+    //QPainter gridPainter(&gridLayer);
+    //drawGridOnCanvas(gridPainter);
 
     QPixmap temporaryLayer(this->size());
     QPainter temporaryPainter(&temporaryLayer);
     drawTemporaryObjectsOnCanvas(temporaryPainter);
 
     setLayer(GCELL_LAYER_INDEX, cellsLayer);
-    setLayer(GRID_LAYER_INDEX, gridLayer);
+    //setLayer(GRID_LAYER_INDEX, gridLayer);
     setLayer(TEMPORARY_LAYER_INDEX, temporaryLayer);
 
     DicomViewWidget::paintEvent(event);
@@ -100,23 +103,43 @@ void DicomGriddedViewWidget::setGcellState(const QPoint& gcell, GcellState state
     }
 }
 
-void DicomGriddedViewWidget::drawGcellsOnCanvas(QPainter& painter) const
+void DicomGriddedViewWidget::drawGcellsOnCanvas(QPainter& painter)
 {
     painter.setPen(GCELL_BOUND_PEN);
     drawGcellsOnCanvas(painter, lungTissueGcells_, GCELL_HEALTHY_BRUSH);
     drawGcellsOnCanvas(painter, sliceInfectedGcells_, GCELL_FULL_INFECTED_BRUSH);
 }
 
-void DicomGriddedViewWidget::drawGcellsOnCanvas(QPainter& painter, const GcellSet& gcells, const QBrush& brush) const
+void DicomGriddedViewWidget::drawGcellsOnCanvas(QPainter& painter, const GcellSet& gcells, const QBrush& brush)
 {
     painter.setBrush(brush);
+
+    QList<QRect>* nowSet = brush.color() == GCELL_HEALTHY_COLOR ? previouslyLabledCellsHealth : previouslyLabledCellsInfected;
+
+    for (const QRect& q : (*nowSet)) {
+        painter.drawRect(q);
+    }
+
     for (const QPoint& gcell : gcells) {
-        const QRect gcellRect = getGcellRectOnScreen(gcell);
-        painter.drawRect(gcellRect);
+        const QRect& gcellRect = getGcellRectOnScreen(gcell);
+
+        bool check = true;
+
+        for (const QRect& q: (*nowSet)) {
+            if (q == gcellRect) {
+                check = false;
+                break;
+            }
+        }
+
+        if (check) {
+            painter.drawRect(gcellRect);
+            (*nowSet).push_back(gcellRect);
+        }
     }
 }
 
-void DicomGriddedViewWidget::drawGridOnCanvas(QPainter& painter) const
+void DicomGriddedViewWidget::drawGridOnCanvas(QPainter& painter)
 {
     painter.setPen(GRID_PEN);
 
@@ -134,6 +157,8 @@ void DicomGriddedViewWidget::drawGridOnCanvas(QPainter& painter) const
         const QPoint lineStartPixel = getScreenPixelForPointCm(QPointF(gridCmX, 0));
         painter.drawLine(lineStartPixel.x(), 0, lineStartPixel.x(), height());
     }
+
+    emit viewUpdated();
 }
 
 void DicomGriddedViewWidget::drawTemporaryObjectsOnCanvas(QPainter& painter) const

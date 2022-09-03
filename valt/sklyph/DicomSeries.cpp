@@ -125,6 +125,9 @@ bool DicomSerie::isLoaded() const
 void DicomSerie::setupLungMatrix()
 {
     if (lungMatrix_) {
+//        lungMatrix_->setInfectionMatrix(currentSliceIndex(), sliceMatrix.infected);
+//        lungMatrix_->setLungTissueMatrix(sliceMatrix.lungTissue);
+
         delete lungMatrix_;
     }
     lungMatrix_ = new LungMatrix(slices_.size(), sliceThicknessCm_, this);
