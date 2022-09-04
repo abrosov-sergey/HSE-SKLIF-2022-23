@@ -130,6 +130,7 @@ private: // FIELDS
     PenToolMouseHandler* penToolMouseHandler_;
     FillToolMouseHandler* fillToolMouseHandler_;
     PolygonToolMouseHandler* polygonToolMouseHandler_;
+    PolygonToolMouseHandler* rulerToolMouseHandler_;
 
     GcellSet gcellMatrix_;
 

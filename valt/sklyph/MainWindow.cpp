@@ -461,11 +461,6 @@ void MainWindow::setupDicomWidgets()
     editWidget_->setMouseHandler(editWidgetMouseHandlerHelper_);
     editWidget_->setGridStepMultiplier(GRID_MULTIPLIERS[DEFAULT_GRID_MULTIPLIER_INDEX]);
 
-    connect(viewWidget_, SIGNAL(viewportUpdated(const QRect&)), editWidget_, SLOT(setViewport(const QRect&)));
-    connect(editWidget_, SIGNAL(viewportUpdated(const QRect&)), viewWidget_, SLOT(setViewport(const QRect&)));
-    connect(viewWidget_, SIGNAL(sliceUpdated()), editWidget_, SLOT(updatePixmap()));
-    connect(editWidget_, SIGNAL(sliceUpdated()), viewWidget_, SLOT(updatePixmap()));
-
     connect(editWidget_, SIGNAL(matrixUpdated(const GcellMatrix&)), this, SLOT(onSliceMatrixUpdated(const GcellMatrix&)));
     connect(penToolMouseHandler_, SIGNAL(densityChanged()), this, SLOT(updateVolumesInGui()));
 }
