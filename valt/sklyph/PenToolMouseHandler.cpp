@@ -109,6 +109,7 @@ void PenToolMouseHandler::getHounsfieldDensity(QImage image, QPoint pos) {
 
 void PenToolMouseHandler::processMouseMoveEvent(QMouseEvent* event)
 {
+    griddedView_->startFillingMode();
     const QPoint pos = event->pos();
     const QPoint gridCell = griddedView_->getGridCellByScreenPixel(pos);
     if (gridCell == lastRegisteredGridCell_) {
@@ -130,7 +131,7 @@ void PenToolMouseHandler::processMouseMoveEvent(QMouseEvent* event)
     lastRegisteredGridCell_ = gridCell;
 
     getHounsfieldDensity(this->view_->getImage(), pos);
-
+    griddedView_->finishFillingMode();
     event->accept();
 }
 

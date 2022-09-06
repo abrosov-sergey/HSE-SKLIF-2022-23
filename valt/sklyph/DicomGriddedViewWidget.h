@@ -89,6 +89,17 @@ private:
     bool isInFillingMode_;
 
     QList<QPoint> tempPolygonGcells_;
+
+    QPixmap *cellsLayer;
+    QPainter *cellsPainter;
+
+    QPixmap *temporaryLayer;
+    QPainter *temporaryPainter;
+
+    QPixmap *gridLayer;
+    QPainter *gridPainter;
+
+    GcellMatrix* matrix;
 };
 
 } // namespace valt

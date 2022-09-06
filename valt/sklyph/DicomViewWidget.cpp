@@ -211,12 +211,12 @@ void DicomViewWidget::onSliceUpdatedByMouseHandler()
 
 void DicomViewWidget::paintEvent(QPaintEvent* event)
 {
-    QPixmap rulerLayer(this->size());
-    if (isRulerEnabled_) {
-        QPainter rulerPainter(&rulerLayer);
-        drawRulerOnCanvas(rulerPainter);
-    }
-    setLayer(RULER_LAYER_INDEX, rulerLayer);
+//    QPixmap rulerLayer(this->size());
+//    if (isRulerEnabled_) {
+//        QPainter rulerPainter(&rulerLayer);
+//        drawRulerOnCanvas(rulerPainter);
+//    }
+//    setLayer(RULER_LAYER_INDEX, rulerLayer);
 
     AspectRatioPixmapLabel::paintEvent(event);
 }

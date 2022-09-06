@@ -109,7 +109,7 @@ void AspectRatioPixmapLabel::paintEvent(QPaintEvent* event)
     }
 
     QPainter painter(this);
-    painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
 
     for (const auto& layer : layers_) {
         painter.drawPixmap(this->rect(), layer);
