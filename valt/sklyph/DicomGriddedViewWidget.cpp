@@ -12,7 +12,7 @@ namespace sklyph {
 namespace valt {
 
 const int GRID_THICKNESS = 1;
-const QColor GRID_COLOR(80, 80, 120, 100);
+const QColor GRID_COLOR(60, 60, 60, 100);
 const QPen GRID_PEN(QBrush(GRID_COLOR), GRID_THICKNESS, Qt::DashLine);
 const int TEMPORARY_POLYGON_THICKNESS = 1;
 const QColor TEMPORARY_POLYGON_COLOR(230, 230, 230, 255);
@@ -42,28 +42,58 @@ DicomGriddedViewWidget::DicomGriddedViewWidget(qreal baseGridStep,
     , gridStepMultiplier_(2)
     , isInFillingMode_(false)
 {
+    matrix = new GcellMatrix();
     reset();
-
     connect(this, SIGNAL(viewUpdated()), this, SLOT(repaint()));
 }
 
 void DicomGriddedViewWidget::paintEvent(QPaintEvent* event)
 {
-    QPixmap cellsLayer(this->size());
-    QPainter cellsPainter(&cellsLayer);
-    drawGcellsOnCanvas(cellsPainter);
+    if (!cellsLayer) {
+        delete cellsLayer;
+        cellsLayer = nullptr;
+    }
 
-    QPixmap gridLayer(this->size());
-    QPainter gridPainter(&gridLayer);
-    drawGridOnCanvas(gridPainter);
+    if (!cellsPainter) {
+        delete cellsPainter;
+        cellsPainter = nullptr;
+    }
 
-    QPixmap temporaryLayer(this->size());
-    QPainter temporaryPainter(&temporaryLayer);
-    drawTemporaryObjectsOnCanvas(temporaryPainter);
+    cellsLayer = new QPixmap(this->size());
+    cellsPainter = new QPainter(cellsLayer);
+    drawGcellsOnCanvas(*cellsPainter);
 
-    setLayer(GCELL_LAYER_INDEX, cellsLayer);
-    setLayer(GRID_LAYER_INDEX, gridLayer);
-    setLayer(TEMPORARY_LAYER_INDEX, temporaryLayer);
+    if (!temporaryLayer) {
+        delete temporaryLayer;
+        temporaryLayer = nullptr;
+    }
+
+    if (!temporaryPainter) {
+        delete temporaryPainter;
+        temporaryPainter = nullptr;
+    }
+
+    temporaryLayer = new QPixmap(this->size());
+    temporaryPainter = new QPainter(temporaryLayer);
+    drawTemporaryObjectsOnCanvas(*temporaryPainter);
+
+    if (!gridLayer) {
+        delete gridLayer;
+        gridLayer = nullptr;
+    }
+
+    if (!gridPainter) {
+        delete gridPainter;
+        gridPainter = nullptr;
+    }
+
+    gridLayer = new QPixmap(this->size());
+    gridPainter = new QPainter(gridLayer);
+    drawGridOnCanvas(*gridPainter);
+
+    setLayer(GCELL_LAYER_INDEX, *cellsLayer);
+    setLayer(GRID_LAYER_INDEX, *gridLayer);
+    setLayer(TEMPORARY_LAYER_INDEX, *temporaryLayer);
 
     DicomViewWidget::paintEvent(event);
 }
@@ -91,11 +121,10 @@ void DicomGriddedViewWidget::setGcellState(const QPoint& gcell, GcellState state
     }
 
     if (!isInFillingMode_) {
-        GcellMatrix matrix;
-        matrix.lungTissue = lungTissueGcells_;
-        matrix.infected = sliceInfectedGcells_;
+        matrix->lungTissue = lungTissueGcells_;
+        matrix->infected = sliceInfectedGcells_;
 
-        emit matrixUpdated(matrix);
+        emit matrixUpdated(*matrix);
         emit viewUpdated();
     }
 }
@@ -274,17 +303,19 @@ void DicomGriddedViewWidget::finishFillingMode()
 {
     isInFillingMode_ = false;
 
-    GcellMatrix matrix;
-    matrix.lungTissue = lungTissueGcells_;
-    matrix.infected = sliceInfectedGcells_;
-    emit matrixUpdated(matrix);
+    matrix->lungTissue = lungTissueGcells_;
+    matrix->infected = sliceInfectedGcells_;
 
+    emit matrixUpdated(*matrix);
     emit viewUpdated();
 }
 
 void DicomGriddedViewWidget::addTemporaryPolygonVertex(const QPoint& gcell)
 {
-    tempPolygonGcells_ << gcell;
+    if (!tempPolygonGcells_.contains(gcell))
+    {
+        tempPolygonGcells_ << gcell;
+    }
 
     emit viewUpdated();
 }

@@ -128,7 +128,7 @@ void DcmMonochromeImage::setRescaledPixel(double p, int x, int y, int frame)
 
 QImage DcmMonochromeImage::toQImage(const DcmImageTransferFunction &tf, int frame) const
 {
-    QImage qImage(width(), height(), QImage::Format_ARGB32);
+    QImage qImage(width(), height(), QImage::Format_RGB32);
 
     double slope = rescaleSlope();
     double offset = rescaleIntercept();
