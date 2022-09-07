@@ -105,28 +105,52 @@ void DicomGriddedViewWidget::triggerStateActionInPixel(const QPoint& pixel, Gcel
     setGcellStates(gcellIndices, state);
 }
 
+void DicomGriddedViewWidget::removeFromMatrix(const QPoint& pixel) {
+    const QVector<QPoint> gcellIndices = getGcellIndicesForScreenPixel(pixel);
+
+    removeGcellStates(gcellIndices);
+}
+
+void DicomGriddedViewWidget::removeGcellStates(const QVector<QPoint>& gcells)
+{
+    for (const QPoint& gcell : gcells) {
+        removeGcellState(gcell);
+    }
+}
+
+void DicomGriddedViewWidget::removeGcellState(const QPoint& gcell)
+{
+    lungTissueGcells_.remove(gcell);
+    sliceInfectedGcells_.remove(gcell);
+
+    matrix->lungTissue = lungTissueGcells_;
+    matrix->infected = sliceInfectedGcells_;
+
+    emit matrixUpdated(*matrix);
+    emit viewUpdated();
+}
+
 void DicomGriddedViewWidget::setGcellState(const QPoint& gcell, GcellState state)
 {
-    if (state == GcellState::GCELL_NONE) {
+    if (state == GcellState::GCELL_NONE)
+    {
         lungTissueGcells_.remove(gcell);
         sliceInfectedGcells_.remove(gcell);
-    }
-    else if (state == GcellState::GCELL_HEALTHY) {
+    } else if (state == GcellState::GCELL_HEALTHY)
+    {
         lungTissueGcells_.insert(gcell);
         sliceInfectedGcells_.remove(gcell);
-    }
-    else {
-        lungTissueGcells_.insert(gcell);
+    } else
+    {
+        lungTissueGcells_.remove(gcell);
         sliceInfectedGcells_.insert(gcell);
     }
 
-    if (!isInFillingMode_) {
-        matrix->lungTissue = lungTissueGcells_;
-        matrix->infected = sliceInfectedGcells_;
+    matrix->lungTissue = lungTissueGcells_;
+    matrix->infected = sliceInfectedGcells_;
 
-        emit matrixUpdated(*matrix);
-        emit viewUpdated();
-    }
+    emit matrixUpdated(*matrix);
+    emit viewUpdated();
 }
 
 void DicomGriddedViewWidget::drawGcellsOnCanvas(QPainter& painter) const
