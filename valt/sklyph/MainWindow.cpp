@@ -45,6 +45,7 @@ MainWindow::MainWindow(const QString& filePath, QWidget *parent)
     , penToolMouseHandler_(nullptr)
     , fillToolMouseHandler_(nullptr)
     , polygonToolMouseHandler_(nullptr)
+    , rubberToolMouseHandler_(nullptr)
 {
     declareQtMetatypes();
 
@@ -63,6 +64,8 @@ MainWindow::MainWindow(const QString& filePath, QWidget *parent)
     if (!filePath.isEmpty()) {
         processPath(filePath);
     }
+
+    update();
 }
 
 MainWindow::~MainWindow()
@@ -397,11 +400,13 @@ void MainWindow::onInfectionMarkModeStateChanged(int)
         penToolMouseHandler_->setMode(PenToolMode::MarkTotalVolume);
         fillToolMouseHandler_->setMode(FillToolMode::MarkTotalVolume);
         polygonToolMouseHandler_->setMode(PolygonlToolMode::MarkTotalVolume);
+        rubberToolMouseHandler_->setMode(RubberToolMode::MarkTotalVolume);
     }
     else {
         penToolMouseHandler_->setMode(PenToolMode::MarkInfection);
         fillToolMouseHandler_->setMode(FillToolMode::MarkInfection);
         polygonToolMouseHandler_->setMode(PolygonlToolMode::MarkInfection);
+        rubberToolMouseHandler_->setMode(RubberToolMode::MarkInfection);
     }
 }
 
@@ -454,6 +459,9 @@ void MainWindow::setupDicomWidgets()
     polygonToolMouseHandler_ = new PolygonToolMouseHandler;
     editWidgetMouseHandlerHelper_->addTool(EditorTool::PolygonTool, polygonToolMouseHandler_);
 
+    rubberToolMouseHandler_ = new RubberToolMouseHandler;
+    editWidgetMouseHandlerHelper_->addTool(EditorTool::RubberTool, rubberToolMouseHandler_);
+
     editWidget_ = new DicomGriddedViewWidget(BASE_GRID_STEP_CM);
     editWidget_->setCellSizeOnScreenCm(DEFAULT_CELL_SIZE_ON_SCREEN_CM);
     editWidget_->setAlignment(Qt::AlignCenter);
@@ -483,6 +491,7 @@ void MainWindow::setupToolsLayout()
     penToolRadio_ = new QRadioButton(tr("Pen"));
     fillToolRadio_ = new QRadioButton(tr("Fill"));
     polygonToolRadio_ = new QRadioButton(tr("Polygon"));
+    rubberToolRadio_ = new QRadioButton(tr("Rubber"));
 
     toolRadioButtonsGroup_->setExclusive(true);
     toolRadioButtonsGroup_->addButton(navigationToolRadio_);
@@ -493,23 +502,39 @@ void MainWindow::setupToolsLayout()
     toolRadioButtonsGroup_->setId(fillToolRadio_, 2);
     toolRadioButtonsGroup_->addButton(polygonToolRadio_);
     toolRadioButtonsGroup_->setId(polygonToolRadio_, 3);
+    toolRadioButtonsGroup_->addButton(rubberToolRadio_);
+    toolRadioButtonsGroup_->setId(rubberToolRadio_, 4);
     connect(toolRadioButtonsGroup_, SIGNAL(buttonClicked(int)), this, SLOT(onToolButtonGroupClicked(int)));
 
     infectionMarkModeCheckBox_ = new QCheckBox(tr("Total volume mark mode"));
     infectionMarkModeCheckBox_->setChecked(true);
     connect(infectionMarkModeCheckBox_, SIGNAL(stateChanged(int)), this, SLOT(onInfectionMarkModeStateChanged(int)));
 
+    topRadiosLayout_ = new QHBoxLayout;
+    topRadiosLayout_->setAlignment(Qt::AlignTop);
+    topRadiosLayout_->addWidget(navigationToolRadio_);
+    topRadiosLayout_->addWidget(penToolRadio_);
+    topRadiosLayout_->addWidget(fillToolRadio_);
+    topRadiosLayout_->addWidget(polygonToolRadio_);
+    topRadiosLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
+    topRadiosLayout_->addWidget(infectionMarkModeCheckBox_);
+
+    bottomRadiosLayout_ = new QHBoxLayout;
+    bottomRadiosLayout_->setAlignment(Qt::AlignTop);
+    bottomRadiosLayout_->addWidget(rubberToolRadio_);
+
+    verticalRadiosLayout_ = new QVBoxLayout;
+    verticalRadiosLayout_->setAlignment(Qt::AlignTop);
+    verticalRadiosLayout_->addLayout(topRadiosLayout_);
+    verticalRadiosLayout_->addLayout(bottomRadiosLayout_);
+
     toolsLayout_ = new QHBoxLayout;
+    toolsLayout_->setAlignment(Qt::AlignTop);
     toolsLayout_->addWidget(gridStepLabel);
     toolsLayout_->addWidget(gridStepCombo_);
     toolsLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
     toolsLayout_->addWidget(toolsLabel);
-    toolsLayout_->addWidget(navigationToolRadio_);
-    toolsLayout_->addWidget(penToolRadio_);
-    toolsLayout_->addWidget(fillToolRadio_);
-    toolsLayout_->addWidget(polygonToolRadio_);
-    toolsLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
-    toolsLayout_->addWidget(infectionMarkModeCheckBox_);
+    toolsLayout_->addLayout(verticalRadiosLayout_);
 }
 
 void MainWindow::setupWorkAreaLayout()
@@ -554,7 +579,13 @@ void MainWindow::setupNavigationLayout()
     connect(sliceSpinBox_, SIGNAL(valueChanged(int)), this, SLOT(onSliceSpinBoxValueChanged(int)));
     sliceTotalCountLabel_ = new QLabel(tr("of 0"));
 
+    QHBoxLayout* scalingLayout = new QHBoxLayout;
+    scalingLayout->setAlignment(Qt::AlignTop);
+    scalingLayout->addWidget(scalingLabel);
+    scalingLayout->addWidget(scalingFactorSpinBox_);
+
     QHBoxLayout* sliceLayout = new QHBoxLayout;
+    sliceLayout->setAlignment(Qt::AlignTop);
     sliceLayout->addWidget(sliceLabel);
     sliceLayout->addWidget(sliceSpinBox_);
     sliceLayout->addWidget(sliceTotalCountLabel_);
@@ -576,9 +607,7 @@ void MainWindow::setupNavigationLayout()
     navigationLayout_->addLayout(fileInfoVBox);
     navigationLayout_->addLayout(sliceLayout);
     navigationLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
-    navigationLayout_->addWidget(scalingLabel);
-    navigationLayout_->addWidget(scalingFactorSpinBox_);
-    navigationLayout_->setAlignment(Qt::AlignTop);
+    navigationLayout_->addLayout(scalingLayout);
     //navigationLayout_->addSpacing(DEFAULT_OPTIONS_SPACING);
     //navigationLayout_->addWidget(rulerCheckBox_);
     navigationLayout_->addStretch();

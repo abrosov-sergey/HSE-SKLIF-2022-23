@@ -8,7 +8,6 @@
 #include <QMouseEvent>
 #include <cmath>
 #include <algorithm>
-#include <iostream>
 
 namespace sklyph {
 namespace valt {

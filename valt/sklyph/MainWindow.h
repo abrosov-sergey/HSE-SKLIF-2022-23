@@ -12,6 +12,7 @@
 #include "PenToolMouseHandler.h"
 #include "FillToolMouseHandler.h"
 #include "PolygonToolMouseHandler.h"
+#include "RubberToolMouseHandler.h"
 
 #include "DcmDataset.h"
 
@@ -131,6 +132,7 @@ private: // FIELDS
     FillToolMouseHandler* fillToolMouseHandler_;
     PolygonToolMouseHandler* polygonToolMouseHandler_;
     PolygonToolMouseHandler* rulerToolMouseHandler_;
+    RubberToolMouseHandler* rubberToolMouseHandler_;
 
     GcellSet gcellMatrix_;
 
@@ -156,6 +158,9 @@ private: // FIELDS
     QVBoxLayout* mainLayout_;
     QHBoxLayout* topBarLayout_;
     QHBoxLayout* toolsLayout_;
+    QHBoxLayout* topRadiosLayout_;
+    QHBoxLayout* bottomRadiosLayout_;
+    QVBoxLayout* verticalRadiosLayout_;
     QHBoxLayout* workAreaLayout_;
     QHBoxLayout* navigationLayout_;
     QGridLayout* lungVolumeInfoLayout_;
@@ -175,6 +180,7 @@ private: // FIELDS
     QRadioButton* penToolRadio_;
     QRadioButton* fillToolRadio_;
     QRadioButton* polygonToolRadio_;
+    QRadioButton* rubberToolRadio_;
 
     QCheckBox* infectionMarkModeCheckBox_;
 

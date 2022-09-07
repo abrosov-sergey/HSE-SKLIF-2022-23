@@ -38,6 +38,9 @@ public:
     QRect getGridCellRectOnPixmap(const QPoint& gridCell) const;
 
     void triggerStateActionInPixel(const QPoint& pixel, GcellState state);
+    void removeFromMatrix(const QPoint& pixel);
+    void removeGcellStates(const QVector<QPoint>& gcells);
+    void removeGcellState(const QPoint& gcell);
 
     void setGcellState(const QPoint& gcell, GcellState state);
     void setGcellStates(const QVector<QPoint>& gcells, GcellState state);

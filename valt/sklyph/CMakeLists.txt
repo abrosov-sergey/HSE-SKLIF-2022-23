@@ -19,6 +19,7 @@ set(SRCS
         PenToolMouseHandler.cpp
         FillToolMouseHandler.cpp
         PolygonToolMouseHandler.cpp
+        RubberToolMouseHandler.cpp
     )
 
 set(HDRS
@@ -40,6 +41,7 @@ set(HDRS
         PenToolMouseHandler.h
         FillToolMouseHandler.h
         PolygonToolMouseHandler.h
+        RubberToolMouseHandler.h
     )
 
 set(MOCS
@@ -58,6 +60,7 @@ set(MOCS
         PenToolMouseHandler.h
         FillToolMouseHandler.h
         PolygonToolMouseHandler.h
+        RubberToolMouseHandler.h
    )
 
 set(LIBS

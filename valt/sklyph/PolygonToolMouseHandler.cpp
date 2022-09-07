@@ -70,7 +70,6 @@ void PolygonToolMouseHandler::setMode(PolygonlToolMode mode)
 
 void PolygonToolMouseHandler::processMousePressEvent(QMouseEvent* event)
 {
-    griddedView_->startFillingMode();
     const auto slice = view_->getSlice();
     if (!slice) {
         return;
@@ -103,7 +102,6 @@ void PolygonToolMouseHandler::processMousePressEvent(QMouseEvent* event)
         distanceBetweenTwoPoints = GetDistanceBetweenTwoPoints(gcellVertices_[gcellVertices_.size() - 2],
                                                                gcellVertices_[gcellVertices_.size() - 1]);
     }
-    griddedView_->finishFillingMode();
 }
 
 GcellState PolygonToolMouseHandler::getPenStateByMouseButtons(Qt::MouseButtons buttons) const
