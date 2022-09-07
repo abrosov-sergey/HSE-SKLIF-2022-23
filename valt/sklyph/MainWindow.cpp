@@ -223,7 +223,7 @@ void MainWindow::updateVolumesInGui()
     qreal infectedPart = lungMatrix->getInfectedVolumePercent();
     // Начало: Абросов Сергей
     qreal densityOfHounsfield = penToolMouseHandler_->densityOfHounsfield;
-    qreal distanceBetweenTwoPoints = polygonToolMouseHandler_->distanceBetweenTwoPoints;
+    qreal distanceBetweenTwoPoints = rulerToolMouseHandler_->getDistance();
     qreal densityOfHounsfieldInPolygon = polygonToolMouseHandler_->densityOfHounsfieldInPolygon;
     // Конец: Абросов Сергей
 
@@ -458,6 +458,8 @@ void MainWindow::setupDicomWidgets()
     editWidgetMouseHandlerHelper_->addTool(EditorTool::FillTool, fillToolMouseHandler_);
     polygonToolMouseHandler_ = new PolygonToolMouseHandler;
     editWidgetMouseHandlerHelper_->addTool(EditorTool::PolygonTool, polygonToolMouseHandler_);
+    rulerToolMouseHandler_ = new RulerToolMouseHandler;
+    editWidgetMouseHandlerHelper_->addTool(EditorTool::RulerTool, rulerToolMouseHandler_);
 
     rubberToolMouseHandler_ = new RubberToolMouseHandler;
     editWidgetMouseHandlerHelper_->addTool(EditorTool::RubberTool, rubberToolMouseHandler_);
@@ -470,7 +472,9 @@ void MainWindow::setupDicomWidgets()
     editWidget_->setGridStepMultiplier(GRID_MULTIPLIERS[DEFAULT_GRID_MULTIPLIER_INDEX]);
 
     connect(editWidget_, SIGNAL(matrixUpdated(const GcellMatrix&)), this, SLOT(onSliceMatrixUpdated(const GcellMatrix&)));
+//    connect(editWidget_, SIGNAL(viewUpdated()), this, SLOT(updateVolumesInGui()));
     connect(penToolMouseHandler_, SIGNAL(densityChanged()), this, SLOT(updateVolumesInGui()));
+    connect(rulerToolMouseHandler_, SIGNAL(updateChanges()), this, SLOT(updateVolumesInGui()));
 }
 
 void MainWindow::setupToolsLayout()
@@ -492,6 +496,7 @@ void MainWindow::setupToolsLayout()
     fillToolRadio_ = new QRadioButton(tr("Fill"));
     polygonToolRadio_ = new QRadioButton(tr("Polygon"));
     rubberToolRadio_ = new QRadioButton(tr("Rubber"));
+    rulerToolRadio_ = new QRadioButton(tr("Ruler"));
 
     toolRadioButtonsGroup_->setExclusive(true);
     toolRadioButtonsGroup_->addButton(navigationToolRadio_);
@@ -504,6 +509,8 @@ void MainWindow::setupToolsLayout()
     toolRadioButtonsGroup_->setId(polygonToolRadio_, 3);
     toolRadioButtonsGroup_->addButton(rubberToolRadio_);
     toolRadioButtonsGroup_->setId(rubberToolRadio_, 4);
+    toolRadioButtonsGroup_->addButton(rulerToolRadio_);
+    toolRadioButtonsGroup_->setId(rulerToolRadio_, 5);
     connect(toolRadioButtonsGroup_, SIGNAL(buttonClicked(int)), this, SLOT(onToolButtonGroupClicked(int)));
 
     infectionMarkModeCheckBox_ = new QCheckBox(tr("Total volume mark mode"));
@@ -522,6 +529,7 @@ void MainWindow::setupToolsLayout()
     bottomRadiosLayout_ = new QHBoxLayout;
     bottomRadiosLayout_->setAlignment(Qt::AlignTop);
     bottomRadiosLayout_->addWidget(rubberToolRadio_);
+    bottomRadiosLayout_->addWidget(rulerToolRadio_);
 
     verticalRadiosLayout_ = new QVBoxLayout;
     verticalRadiosLayout_->setAlignment(Qt::AlignTop);

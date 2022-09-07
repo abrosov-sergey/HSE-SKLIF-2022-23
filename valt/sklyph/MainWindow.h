@@ -13,6 +13,7 @@
 #include "FillToolMouseHandler.h"
 #include "PolygonToolMouseHandler.h"
 #include "RubberToolMouseHandler.h"
+#include "RulerToolMouseHandler.h"
 
 #include "DcmDataset.h"
 
@@ -131,8 +132,8 @@ private: // FIELDS
     PenToolMouseHandler* penToolMouseHandler_;
     FillToolMouseHandler* fillToolMouseHandler_;
     PolygonToolMouseHandler* polygonToolMouseHandler_;
-    PolygonToolMouseHandler* rulerToolMouseHandler_;
     RubberToolMouseHandler* rubberToolMouseHandler_;
+    RulerToolMouseHandler* rulerToolMouseHandler_;
 
     GcellSet gcellMatrix_;
 
@@ -181,6 +182,7 @@ private: // FIELDS
     QRadioButton* fillToolRadio_;
     QRadioButton* polygonToolRadio_;
     QRadioButton* rubberToolRadio_;
+    QRadioButton* rulerToolRadio_;
 
     QCheckBox* infectionMarkModeCheckBox_;
 

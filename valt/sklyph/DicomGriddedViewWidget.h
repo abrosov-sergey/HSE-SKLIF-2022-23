@@ -50,6 +50,8 @@ public:
 
     void addTemporaryPolygonVertex(const QPoint& gcell);
     void clearTemporaryPolygon();
+    void clearRuler();
+    void addRulerPoint(QPoint point);
 
     QPoint getGcellCenterOnScreen(const QPoint& gcell) const;
 
@@ -70,8 +72,9 @@ private:
     void drawGcellsOnCanvas(QPainter& painter) const;
     void drawGcellsOnCanvas(QPainter& painter, const GcellSet& gcells, const QBrush& brush) const;
     void drawGridOnCanvas(QPainter& painter) const;
-    void drawTemporaryObjectsOnCanvas(QPainter& painter) const;
+    void drawTemporaryObjectsOnCanvas(QPainter& painter);
     void drawTemporaryPolygonOnCanvas(QPainter& painter) const;
+    void drawRulerLines(QPainter& painter);
 
     void drawGcellsOnPixmap(QPainter& painter) const;
     void drawGcellsOnPixmap(QPainter& painter, const GcellSet& gcells, const QBrush& brush) const;
@@ -103,6 +106,9 @@ private:
     QPainter *gridPainter;
 
     GcellMatrix* matrix;
+
+    QPoint rulerFirstPoint;
+    QPoint rulerSecondPoint;
 };
 
 } // namespace valt

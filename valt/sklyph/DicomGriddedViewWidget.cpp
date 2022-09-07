@@ -27,9 +27,12 @@ const QColor GCELL_HEALTHY_COLOR(0, 200, 0, 35);
 const QBrush GCELL_FULL_INFECTED_BRUSH(GCELL_FULL_INFECTED_COLOR, Qt::SolidPattern);
 const QBrush GCELL_HALF_INFECTED_BRUSH(GCELL_HALF_INFECTED_COLOR, Qt::SolidPattern);
 const QBrush GCELL_HEALTHY_BRUSH(GCELL_HEALTHY_COLOR, Qt::SolidPattern);
+const QColor RULER_COLOR(20, 30, 100, 240);
+
 
 const QColor LINE_COLOR(205, 0, 173, 255);
 const QPen POYGON_PEN(LINE_COLOR, 5);
+const QPen RULER_PEN(RULER_COLOR, 3);
 
 const int GRID_LAYER_INDEX = 112;
 const int GCELL_LAYER_INDEX = 223;
@@ -189,9 +192,38 @@ void DicomGriddedViewWidget::drawGridOnCanvas(QPainter& painter) const
     }
 }
 
-void DicomGriddedViewWidget::drawTemporaryObjectsOnCanvas(QPainter& painter) const
+void DicomGriddedViewWidget::drawTemporaryObjectsOnCanvas(QPainter& painter)
 {
+    if (!(rulerFirstPoint.isNull() && rulerSecondPoint.isNull()))
+    {
+        drawRulerLines(painter);
+    }
     drawTemporaryPolygonOnCanvas(painter);
+}
+
+void DicomGriddedViewWidget::drawRulerLines(QPainter& painter)
+{
+    painter.setPen(RULER_PEN);
+    painter.setBrush(TEMPORARY_POLYGON_BRUSH);
+
+    const auto p1 = getGcellCenterOnScreen(rulerFirstPoint);
+    const auto p2 = getGcellCenterOnScreen(rulerSecondPoint);
+
+    if (!rulerFirstPoint.isNull())
+    {
+        painter.drawEllipse(p1, 3,3);
+    }
+
+    if (rulerSecondPoint.isNull())
+    {
+        emit viewUpdated();
+        return;
+    }
+
+    painter.drawEllipse(p2, 3,3);
+    painter.drawLine(p1, p2);
+
+    emit viewUpdated();
 }
 
 void DicomGriddedViewWidget::drawTemporaryPolygonOnCanvas(QPainter& painter) const
@@ -342,6 +374,18 @@ void DicomGriddedViewWidget::addTemporaryPolygonVertex(const QPoint& gcell)
     }
 
     emit viewUpdated();
+}
+
+void DicomGriddedViewWidget::addRulerPoint(QPoint point)
+{
+    rulerFirstPoint = rulerSecondPoint;
+    rulerSecondPoint = point;
+}
+
+void DicomGriddedViewWidget::clearRuler()
+{
+    rulerFirstPoint = QPoint();
+    rulerSecondPoint = QPoint();
 }
 
 void DicomGriddedViewWidget::clearTemporaryPolygon()

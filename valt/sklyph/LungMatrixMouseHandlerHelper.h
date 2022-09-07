@@ -16,7 +16,8 @@ typedef enum {
     PenTool,
     FillTool,
     PolygonTool,
-    RubberTool
+    RubberTool,
+    RulerTool
 } EditorTool;
 
 class LungMatrixMouseHandlerHelper: public AbstractToolMouseHandler

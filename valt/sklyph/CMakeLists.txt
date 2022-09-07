@@ -20,6 +20,7 @@ set(SRCS
         FillToolMouseHandler.cpp
         PolygonToolMouseHandler.cpp
         RubberToolMouseHandler.cpp
+        RulerToolMouseHandler.cpp
     )
 
 set(HDRS
@@ -42,6 +43,7 @@ set(HDRS
         FillToolMouseHandler.h
         PolygonToolMouseHandler.h
         RubberToolMouseHandler.h
+        RulerToolMouseHandler.h
     )
 
 set(MOCS
@@ -61,6 +63,7 @@ set(MOCS
         FillToolMouseHandler.h
         PolygonToolMouseHandler.h
         RubberToolMouseHandler.h
+        RulerToolMouseHandler.h
    )
 
 set(LIBS
